@@ -1,0 +1,14 @@
+from datetime import datetime
+from models import Notice
+from sqlalchemy.orm import Session
+
+def get_notice_list(db: Session, skip: int = 0, limit: int = 10):
+    _notice_list = db.query(Notice).order_by(Notice.id.desc())
+
+    total = _notice_list.count()
+    notice_list = _notice_list.offset(skip).limit(limit).all()
+    return total, notice_list  # (전체 건수, 페이징 적용된 질문 목록)
+
+def get_notice(db: Session, notice_id: int):
+    notice = db.query(Notice).get(notice_id)
+    return notice
