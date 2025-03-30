@@ -1,0 +1,13 @@
+[tool.poetry]
+name = "humake_api"
+version = "0.1.0"
+description = "Humake FastAPI Project"
+authors = ["jedaeroweb <admin@jedaeroweb.co.kr>"]
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.95.0"
+uvicorn = "^0.18.3"
+SQLAlchemy = ">=2.0,<3.0"
+itsdangerous = ">=2.2.0"

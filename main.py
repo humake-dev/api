@@ -1,9 +1,18 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from starlette.middleware.cors import CORSMiddleware
+from starlette.middleware.sessions import SessionMiddleware
+
+from domain.entrance.entrance_router import entrance_list
 from domain.notice import notice_router
 from domain.user import user_router
+from domain.trainer import trainer_router
+from domain.exercise import exercise_router
+from domain.exercise_category import exercise_category_router
+from domain.reservation import reservation_router
+from domain.entrance import entrance_router
 
 app = FastAPI()
+app.add_middleware(SessionMiddleware, secret_key="your_secret_key")
 
 origins = [
     "http://127.0.0.1:5173",    # 또는 "http://localhost:5173"
@@ -18,6 +27,22 @@ app.add_middleware(
 )
 
 
+def auth_required(func):
+    """특정 엔드포인트에만 인증 적용 (데코레이터)"""
+    @wraps(func)
+    async def wrapper(*args, **kwargs):
+        request = kwargs.get("request")
+        if not request or not request.session.get("user_id"):
+            raise HTTPException(status_code=401, detail="no_auth")
+        return await func(*args, **kwargs)
+    return wrapper
+
+
+
 app.include_router(notice_router.router)
 app.include_router(user_router.router)
-
+app.include_router(trainer_router.router)
+app.include_router(exercise_router.router)
+app.include_router(exercise_category_router.router)
+app.include_router(reservation_router.router)
+app.include_router(entrance_router.router)

@@ -1,12 +1,13 @@
 import datetime
+
 from pydantic import BaseModel
 
 
-class Notice(BaseModel):
+class Trainer(BaseModel):
     id: int
-    title: str
+    name: str
     created_at: datetime.datetime
 
-class NoticeList(BaseModel):
+class TrainerList(BaseModel):
     total: int = 0
-    notice_list: list[Notice] = []
+    trainer_list: list[Trainer] = []
