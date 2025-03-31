@@ -2,6 +2,7 @@ from fastapi import FastAPI, HTTPException
 from starlette.middleware.cors import CORSMiddleware
 from starlette.middleware.sessions import SessionMiddleware
 
+
 from domain.entrance.entrance_router import entrance_list
 from domain.notice import notice_router
 from domain.user import user_router
@@ -25,19 +26,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-
-def auth_required(func):
-    """특정 엔드포인트에만 인증 적용 (데코레이터)"""
-    @wraps(func)
-    async def wrapper(*args, **kwargs):
-        request = kwargs.get("request")
-        if not request or not request.session.get("user_id"):
-            raise HTTPException(status_code=401, detail="no_auth")
-        return await func(*args, **kwargs)
-    return wrapper
-
-
 
 app.include_router(notice_router.router)
 app.include_router(user_router.router)

@@ -3,13 +3,13 @@ from sqlalchemy.orm import Session
 from database import get_db
 from domain.user import user_schema, user_crud
 from starlette import status
-from default_func import get_current_user
+from default_func import *
 
 router = APIRouter()
 
-@router.get("/user", response_model=user_schema.User, dependencies=[Depends(get_current_user)])
-def user_detail( db: Session = Depends(get_db),user_id: int = Depends(get_current_user)):
-    user = user_crud.get_user(db, user_id)
+@router.get("/user", response_model=user_schema.User)
+def user_detail( db: Session = Depends(get_db),session: dict = Depends(get_session)):
+    user = user_crud.get_user(db, session)
 
     if user is None:
         raise HTTPException(status_code=404, detail="trainer not found")
@@ -17,11 +17,15 @@ def user_detail( db: Session = Depends(get_db),user_id: int = Depends(get_curren
     return user
 
 @router.post("/login")
-async def login(request: Request):
-    request.session["user_id"] = 11632  # 세션에 저장
-    return {"message": "로그인 성공"}
+def login(response: Response, user_id: int, db: Session = Depends(get_db)):
+    user = user_crud.get_user(db, {"user_id": user_id})
+
+    session_data = {"user_id": user_id, "branch_id": user.branch_id}
+    session_cookie = serializer.dumps(session_data)
+    response.set_cookie(key=SESSION_COOKIE_NAME, value=session_cookie, httponly=True)
+    return {"message": "Session set"}
 
 @router.post("/logout")
-async def logout(request: Request, response: Response):
-    request.session.clear()  # 세션 삭제
-    return {"message": "로그아웃 성공"}
+def logout(response: Response):
+    response.delete_cookie(SESSION_COOKIE_NAME)
+    return {"message": "Logged out"}
