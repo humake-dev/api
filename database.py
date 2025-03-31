@@ -1,8 +1,11 @@
+import pymysql
+pymysql.install_as_MySQLdb()
+
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import declarative_base, sessionmaker
 
 # MySQL 접속 정보 설정
-DATABASE_URL = "mysql+mysqldb://humake:humake1!@localhost/humake_development"
+DATABASE_URL = "mysql+pymysql://humake:humake1!@localhost/humake_development"
 
 # 엔진 생성
 engine = create_engine(
