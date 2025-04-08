@@ -17,7 +17,7 @@ def exercise_category_list(db: Session = Depends(get_db),page: int = 0, size: in
 
 @router.get("/{exercise_category_id}", response_model=exercise_category_schema.ExerciseCategory)
 def exercise_category_detail(exercise_category_id: int, db: Session = Depends(get_db)):
-    exercise_category= exercise_category_crud.get_exercise_category(db, exercise_category_id=exercise_category_id)
+    exercise_category= exercise_category_crud.get_exercise_category(db, id=exercise_category_id)
 
     if exercise_category is None:
         raise HTTPException(status_code=404, detail="exercise_category not found")

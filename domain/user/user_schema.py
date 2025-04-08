@@ -1,5 +1,4 @@
 import datetime
-
 from typing import Optional
 from pydantic import BaseModel
 
@@ -11,5 +10,5 @@ class User(BaseModel):
     id: int
     name: str
     created_at: datetime.datetime
-    user_picture: Optional[UserPicture] = None
+    picture: Optional[UserPicture] = None
 

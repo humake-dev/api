@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 
 
 def get_user(db: Session, session: dict):
-    user = db.query(User).join(User.user_picture,isouter=True).filter(User.id== session['user_id'], User.enable == True).first()
+    user = db.query(User).join(User.picture,isouter=True).filter(User.id== session['user_id'], User.enable == True).first()
     return user
 
 def get_user_by_phone(db: Session, phone: str):

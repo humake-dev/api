@@ -10,9 +10,10 @@ class TrainerPicture(BaseModel):
 
 class Trainer(BaseModel):
     id: int
+    branch_id: int
     name: str
     created_at: datetime.datetime
-    trainer_picture:  Optional[TrainerPicture] = None
+    picture:  Optional[TrainerPicture] = None
 
 class TrainerList(BaseModel):
     total: int = 0

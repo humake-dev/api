@@ -5,8 +5,6 @@ from sqlalchemy.orm import relationship
 
 from database import Base
 
-
-
 class Notice(Base):
     __tablename__ = "notices"
 
@@ -15,6 +13,14 @@ class Notice(Base):
     title = Column(String, nullable=False)
     created_at = Column(DateTime, nullable=False)
     updated_at = Column(DateTime, nullable=False)
+    content = relationship("NoticeContent", back_populates="notice", uselist=False)
+
+class NoticeContent(Base):
+    __tablename__ = "notice_contents"
+
+    id = Column(Integer, ForeignKey("notices.id"), primary_key=True)
+    content = Column(Text, nullable=False)
+    notice = relationship("Notice",primaryjoin="Notice.id == foreign(NoticeContent.id)")
 
 class User(Base):
     __tablename__ = "users"
@@ -25,7 +31,7 @@ class User(Base):
     enable = Column(Boolean, default=True, nullable=False)
     created_at = Column(DateTime, nullable=False)
     updated_at = Column(DateTime, nullable=False)
-    user_picture = relationship("UserPicture", back_populates="user", uselist=False)
+    picture = relationship("UserPicture", back_populates="user", uselist=False)
 
 class UserPicture(Base):
     __tablename__ = "user_pictures"
@@ -43,7 +49,7 @@ class Trainer(Base):
     name = Column(String, nullable=False)
     created_at = Column(DateTime, nullable=False)
     updated_at = Column(DateTime, nullable=False)
-    trainer_picture = relationship("TrainerPicture", back_populates="trainer", uselist=False)
+    picture = relationship("TrainerPicture", back_populates="trainer", uselist=False)
 
 class TrainerPicture(Base):
     __tablename__ = "admin_pictures"
@@ -60,14 +66,34 @@ class ExerciseCategory(Base):
     title = Column(String, nullable=False)
     created_at = Column(DateTime, nullable=False)
     updated_at = Column(DateTime, nullable=False)
+    picture = relationship("ExerciseCategoryPicture", back_populates="exercise_category", uselist=False)
+
+class ExerciseCategoryPicture(Base):
+    __tablename__ = "exercise_category_pictures"
+
+    id = Column(Integer, primary_key=True)
+    picture_url = Column(String, nullable=False)
+    exercise_category_id = Column(Integer, ForeignKey("exercise_categories.id"))
+    exercise_category = relationship("ExerciseCategory",primaryjoin="ExerciseCategory.id == foreign(ExerciseCategoryPicture.exercise_category_id)")
 
 class Exercise(Base):
     __tablename__ = "exercises"
 
     id = Column(Integer, primary_key=True)
+    exercise_category_id = Column(Integer, nullable=False)
     title = Column(String, nullable=False)
+    content = Column(Text, nullable=False)
     created_at = Column(DateTime, nullable=False)
     updated_at = Column(DateTime, nullable=False)
+    picture = relationship("ExercisePicture", back_populates="exercise", uselist=False)
+
+class ExercisePicture(Base):
+    __tablename__ = "exercise_pictures"
+
+    id = Column(Integer, primary_key=True)
+    picture_url = Column(String, nullable=False)
+    exercise_id = Column(Integer, ForeignKey("exercises.id"))
+    exercise = relationship("Exercise",primaryjoin="Exercise.id == foreign(ExercisePicture.exercise_id)")
 
 class Reservation(Base):
     __tablename__ = "reservations"

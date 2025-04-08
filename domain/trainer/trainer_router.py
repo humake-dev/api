@@ -17,7 +17,7 @@ def trainer_list(db: Session = Depends(get_db), session: dict = Depends(get_sess
 
 @router.get("/{trainer_id}", response_model=trainer_schema.Trainer)
 def trainer_detail(trainer_id: int, session: dict = Depends(get_session), db: Session = Depends(get_db)):
-    trainer = trainer_crud.get_trainer(db, session, trainer_id=trainer_id)
+    trainer = trainer_crud.get_trainer(db, session, id=trainer_id)
 
     if trainer is None:
         raise HTTPException(status_code=404, detail="trainer not found")

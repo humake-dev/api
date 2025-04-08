@@ -12,12 +12,12 @@ def reservation_list(db: Session = Depends(get_db), session: dict = Depends(get_
     total, _reservation_list = reservation_crud.get_reservation_list(db, session, skip=page*size, limit=size)
     return {
         'total': total,
-        'reservation_list': _reservation_list
+        'list': _reservation_list
     }
 
 @router.get("/{reservation_id}", response_model=reservation_schema.Reservation)
 def reservation_detail(reservation_id: int, session: dict = Depends(get_session), db: Session = Depends(get_db)):
-    reservation = reservation_crud.get_reservation(db, session, reservation_id=reservation_id)
+    reservation = reservation_crud.get_reservation(db, session, id=reservation_id)
 
     if reservation is None:
         raise HTTPException(status_code=404, detail="reservation not found")
