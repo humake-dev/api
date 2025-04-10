@@ -8,9 +8,15 @@ class Notice(BaseModel):
     title: str
     created_at: datetime.datetime
 
+    class Config:
+        orm_mode = True
+
+
 class NoticeContent(BaseModel):
     id: int
-    content:  str
+    content : str
+    class Config:
+        orm_mode = True
 
 class NoticeList(BaseModel):
     total: int = 0
