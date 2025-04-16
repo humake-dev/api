@@ -6,6 +6,9 @@ from pydantic import BaseModel
 class ExercisePicture(BaseModel):
     id: int
     picture_url: str
+    model_config = {
+        "from_attributes": True
+    }
 
 class Exercise(BaseModel):
     id: int
@@ -14,6 +17,9 @@ class Exercise(BaseModel):
     content : str
     created_at: datetime.datetime
     picture:  Optional[ExercisePicture] = None
+    model_config = {
+        "from_attributes": True
+    }
 
 class ExerciseList(BaseModel):
     total: int = 0

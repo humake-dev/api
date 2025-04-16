@@ -7,6 +7,9 @@ class Reservation(BaseModel):
     start_time: datetime.datetime
     end_time: datetime.datetime
     created_at: datetime.datetime
+    model_config = {
+        "from_attributes": True
+    }
 
 class ReservationUserResponse(BaseModel):
     id: int

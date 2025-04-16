@@ -1,8 +1,7 @@
 import datetime
-from typing import Optional
 from pydantic import BaseModel
 
-class Notice(BaseModel):
+class Message(BaseModel):
     id: int
     branch_id: int
     title: str
@@ -11,14 +10,13 @@ class Notice(BaseModel):
         "from_attributes": True
     }
 
-
-class NoticeContent(BaseModel):
+class MessageContent(BaseModel):
     id: int
     content : str
     model_config = {
         "from_attributes": True
     }
 
-class NoticeList(BaseModel):
+class MessageList(BaseModel):
     total: int = 0
-    notice_list: list[Notice] = []
+    message_list: list[Message] = []

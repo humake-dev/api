@@ -2,6 +2,7 @@ from xmlrpc.client import Boolean
 
 from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, Boolean
 from sqlalchemy.orm import relationship
+from datetime import datetime
 
 from database import Base
 
@@ -120,3 +121,70 @@ class Entrance(Base):
     user_id = Column(Integer, nullable=False)
     in_time = Column(DateTime, nullable=False)
     created_at = Column(DateTime, nullable=False)
+
+class Message(Base):
+    __tablename__ = "messages"
+
+    id = Column(Integer, primary_key=True)
+    branch_id = Column(Integer, nullable=False)
+    title = Column(String, nullable=False)
+    created_at = Column(DateTime, nullable=False)
+    updated_at = Column(DateTime, nullable=False)
+    content = relationship("MessageContent", back_populates="message", uselist=False)
+
+class MessageUser(Base):
+    __tablename__ = "message_users"
+
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, nullable=False)
+    display = Column(Boolean, nullable=False)
+    message_id = Column(Integer, ForeignKey("messages.id"))
+    message = relationship("Message",primaryjoin="Message.id == foreign(MessageUser.message_id)")
+
+class MessageContent(Base):
+    __tablename__ = "message_contents"
+
+    id = Column(Integer, ForeignKey("messages.id"), primary_key=True)
+    content = Column(Text, nullable=False)
+    message = relationship("Message",primaryjoin="Message.id == foreign(MessageContent.id)")
+
+class Counsel(Base):
+    __tablename__ = "counsels"
+
+    id = Column(Integer, primary_key=True)
+    branch_id = Column(Integer, nullable=False)
+    title = Column(String, nullable=False)
+    type = Column(String, nullable=False)
+    execute_date = Column(DateTime, nullable=False)
+    question_course = Column(Integer, nullable=False)
+    created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
+    updated_at = Column(DateTime, nullable=False, default=datetime.utcnow)
+    content = relationship("CounselContent", back_populates="counsel", uselist=False)
+
+class CounselContent(Base):
+    __tablename__ = "counsel_contents"
+
+    id = Column(Integer, ForeignKey("counsels.id"), primary_key=True)
+    content = Column(Text, nullable=False)
+    counsel = relationship("Counsel",primaryjoin="Counsel.id == foreign(CounselContent.id)")
+
+class CounselUser(Base):
+    __tablename__ = "counsel_users"
+
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, nullable=False)
+    display = Column(Boolean, nullable=False, default=True)
+    counsel_id = Column(Integer, ForeignKey("counsels.id"))
+    counsel = relationship("Counsel",primaryjoin="Counsel.id == foreign(CounselUser.counsel_id)")
+
+class Stop(Base):
+    __tablename__ = "user_stops"
+
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, nullable=False)
+    order_id = Column(Integer, nullable=False)
+    stop_start_date = Column(DateTime, nullable=False)
+    stop_end_date = Column(DateTime, nullable=False)
+    request_date = Column(DateTime, nullable=False)
+    created_at = Column(DateTime, nullable=False)
+    updated_at = Column(DateTime, nullable=False)

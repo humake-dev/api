@@ -1,8 +1,7 @@
 import datetime
-from typing import Optional
 from pydantic import BaseModel
 
-class Notice(BaseModel):
+class Counsel(BaseModel):
     id: int
     branch_id: int
     title: str
@@ -11,14 +10,20 @@ class Notice(BaseModel):
         "from_attributes": True
     }
 
-
-class NoticeContent(BaseModel):
+class CounselContent(BaseModel):
     id: int
     content : str
     model_config = {
         "from_attributes": True
     }
 
-class NoticeList(BaseModel):
+class CounselList(BaseModel):
     total: int = 0
-    notice_list: list[Notice] = []
+    counsel_list: list[Counsel] = []
+
+class CounselCreate(BaseModel):
+    question_course: str
+    content : str
+    model_config = {
+        "from_attributes": True
+    }
