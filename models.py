@@ -1,10 +1,14 @@
 from xmlrpc.client import Boolean
 
-from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, Boolean
+from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, Boolean, Enum as SqlEnum
 from sqlalchemy.orm import relationship
 from datetime import datetime
-
 from database import Base
+from enum import Enum
+
+class CounselQuestionCourse(str, Enum):
+    default = "default"
+    pt = "pt"
 
 class Notice(Base):
     __tablename__ = "notices"
@@ -156,7 +160,7 @@ class Counsel(Base):
     title = Column(String, nullable=False)
     type = Column(String, nullable=False)
     execute_date = Column(DateTime, nullable=False)
-    question_course = Column(Integer, nullable=False)
+    question_course = Column(SqlEnum(CounselQuestionCourse), nullable=False, default=CounselQuestionCourse.default)
     created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
     updated_at = Column(DateTime, nullable=False, default=datetime.utcnow)
     content = relationship("CounselContent", back_populates="counsel", uselist=False)
@@ -178,13 +182,12 @@ class CounselUser(Base):
     counsel = relationship("Counsel",primaryjoin="Counsel.id == foreign(CounselUser.counsel_id)")
 
 class Stop(Base):
-    __tablename__ = "user_stops"
+    __tablename__ = "user_stop_requests"
 
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, nullable=False)
-    order_id = Column(Integer, nullable=False)
     stop_start_date = Column(DateTime, nullable=False)
     stop_end_date = Column(DateTime, nullable=False)
-    request_date = Column(DateTime, nullable=False)
-    created_at = Column(DateTime, nullable=False)
-    updated_at = Column(DateTime, nullable=False)
+    description = Column(String, nullable=False)
+    created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
+    updated_at = Column(DateTime, nullable=False, default=datetime.utcnow)

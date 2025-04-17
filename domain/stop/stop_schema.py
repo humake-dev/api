@@ -1,6 +1,4 @@
 import datetime
-
-from typing import Optional
 from pydantic import BaseModel
 
 class Stop(BaseModel):
@@ -15,9 +13,9 @@ class StopList(BaseModel):
     stop_list: list[Stop] = []
 
 class StopCreate(BaseModel):
-    stop_start_date : str
-    stop_end_date : str
-    content : str
+    stop_start_date : datetime.date
+    stop_end_date : datetime.date
+    description : str
     model_config = {
         "from_attributes": True
     }

@@ -1,5 +1,5 @@
 from datetime import datetime
-from models import Counsel, CounselContent, CounselUser
+from models import Counsel, CounselContent, CounselUser, CounselQuestionCourse
 from sqlalchemy.orm import Session
 from sqlalchemy import select, func
 from domain.counsel import counsel_schema

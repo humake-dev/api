@@ -15,30 +15,13 @@ def get_stop(db: Session, session: dict, id: int):
 
 def set_stop(db: Session, session: dict, stop_data: stop_schema.StopCreate):
     stop = Stop(
-        branch_id=session['branch_id'],
-        title='앱에서의 요청',
-        question_course=counsel_data.question_course,
-        execute_date=datetime.now(),
-        type='D'
+        user_id=session['user_id'],
+        stop_start_date=stop_data.stop_start_date,
+        stop_end_date=stop_data.stop_end_date,
+        description=stop_data.description
     )
     db.add(stop)
     db.commit()
-    db.refresh(counsel)
+    db.refresh(stop)
 
-    # 2. CounselUser 객체 생성 (이제 counsel.id 사용 가능)
-    counselUser = CounselUser(
-        counsel_id=counsel.id,  # 오타가 counsel_id 가 아니라 counse_id 이거 맞는지 확인!
-        user_id=session['user_id']
-    )
-    db.add(counselUser)
-    db.commit()
-
-    counselContent = CounselContent(
-        id=counsel.id,
-        content=counsel_data.content,
-    )
-
-    db.add(counselContent)
-    db.commit()
-
-    return counsel.id
+    return stop.id

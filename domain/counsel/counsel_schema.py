@@ -1,5 +1,6 @@
 import datetime
 from pydantic import BaseModel
+from models import CounselQuestionCourse
 
 class Counsel(BaseModel):
     id: int
@@ -22,7 +23,7 @@ class CounselList(BaseModel):
     counsel_list: list[Counsel] = []
 
 class CounselCreate(BaseModel):
-    question_course: str
+    question_course: CounselQuestionCourse
     content : str
     model_config = {
         "from_attributes": True
