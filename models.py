@@ -52,6 +52,8 @@ class Trainer(Base):
     id = Column(Integer, primary_key=True)
     branch_id = Column(Integer, nullable=False)
     name = Column(String, nullable=False)
+    is_trainer = Column(Boolean, nullable=False)
+    enable = Column(Boolean, nullable=False)
     created_at = Column(DateTime, nullable=False)
     updated_at = Column(DateTime, nullable=False)
     picture = relationship("TrainerPicture", back_populates="trainer", uselist=False)
