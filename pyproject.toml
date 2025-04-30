@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "humake_api"
+version = "0.1.0"
+description = "Humake FastAPI Project"
+authors = ["jedaeroweb <admin@jedaeroweb.co.kr>"]
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.10"
+uvicorn = "^0.18.3"
+SQLAlchemy = ">=2.0,<3.0"
+itsdangerous = ">=2.2.0"
+pymysql = ">=1.1.1"
+cryptography = "^44.0.2"
+fastapi = "^0.115.12"
+pydantic = "^2.6"
+python-dotenv = "^1.1.0"
+
+
+[tool.poetry.group.production.dependencies]
+gunicorn = "^21.2.0"  # production 전용
