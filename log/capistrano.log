@@ -1,0 +1,361 @@
+# Logfile created on 2025-04-30 14:48:53 +0900 by logger.rb/v1.7.0
+  INFO ---------------------------------------------------------------------------
+  INFO START 2025-04-30 14:48:53 +0900 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [e6319ea1] Running /usr/bin/env mkdir -p /tmp as deploy@deploy_server
+ DEBUG [e6319ea1] Command: /usr/bin/env mkdir -p /tmp
+  INFO [e6319ea1] Finished in 0.444 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-dff40a5cee6a240f3317.sh 0.0%
+  INFO Uploading /tmp/git-ssh-dff40a5cee6a240f3317.sh 100.0%
+  INFO [7fc6cf6a] Running /usr/bin/env chmod 700 /tmp/git-ssh-dff40a5cee6a240f3317.sh as deploy@deploy_server
+ DEBUG [7fc6cf6a] Command: /usr/bin/env chmod 700 /tmp/git-ssh-dff40a5cee6a240f3317.sh
+  INFO [7fc6cf6a] Finished in 0.062 seconds with exit status 0 (successful).
+  INFO [7d29ddab] Running /usr/bin/env git ls-remote git@github.com:humake-dev/api.git HEAD as deploy@deploy_server
+ DEBUG [7d29ddab] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-dff40a5cee6a240f3317.sh" ; /usr/bin/env git ls-remote git@github.com:humake-dev/api.git HEAD )
+ DEBUG [7d29ddab] 	b73d986078ca98cde840004f3cd0c606de1b41e0	HEAD
+  INFO [7d29ddab] Finished in 2.336 seconds with exit status 0 (successful).
+  INFO [b948f041] Running /usr/bin/env mkdir -p /var/www/vhosts/api/shared /var/www/vhosts/api/releases as deploy@deploy_server
+ DEBUG [b948f041] Command: /usr/bin/env mkdir -p /var/www/vhosts/api/shared /var/www/vhosts/api/releases
+  INFO [b948f041] Finished in 0.065 seconds with exit status 0 (successful).
+  INFO [110d513e] Running /usr/bin/env mkdir -p /var/www/vhosts/api/shared as deploy@deploy_server
+ DEBUG [110d513e] Command: /usr/bin/env mkdir -p /var/www/vhosts/api/shared
+  INFO [110d513e] Finished in 0.063 seconds with exit status 0 (successful).
+ DEBUG [40db4436] Running [ -f /var/www/vhosts/api/shared/.env ] as deploy@deploy_server
+ DEBUG [40db4436] Command: [ -f /var/www/vhosts/api/shared/.env ]
+ DEBUG [40db4436] Finished in 0.062 seconds with exit status 1 (failed).
+ ERROR linked file /var/www/vhosts/api/shared/.env does not exist on deploy_server
+  INFO ---------------------------------------------------------------------------
+  INFO START 2025-04-30 14:49:44 +0900 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [ecea12a5] Running /usr/bin/env mkdir -p /tmp as deploy@deploy_server
+ DEBUG [ecea12a5] Command: /usr/bin/env mkdir -p /tmp
+  INFO [ecea12a5] Finished in 0.445 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-f31e86746821af36fe91.sh 0.0%
+  INFO Uploading /tmp/git-ssh-f31e86746821af36fe91.sh 100.0%
+  INFO [b007b857] Running /usr/bin/env chmod 700 /tmp/git-ssh-f31e86746821af36fe91.sh as deploy@deploy_server
+ DEBUG [b007b857] Command: /usr/bin/env chmod 700 /tmp/git-ssh-f31e86746821af36fe91.sh
+  INFO [b007b857] Finished in 0.060 seconds with exit status 0 (successful).
+  INFO [f6582e91] Running /usr/bin/env git ls-remote git@github.com:humake-dev/api.git HEAD as deploy@deploy_server
+ DEBUG [f6582e91] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-f31e86746821af36fe91.sh" ; /usr/bin/env git ls-remote git@github.com:humake-dev/api.git HEAD )
+ DEBUG [f6582e91] 	b73d986078ca98cde840004f3cd0c606de1b41e0	HEAD
+  INFO [f6582e91] Finished in 2.341 seconds with exit status 0 (successful).
+  INFO [111595fd] Running /usr/bin/env mkdir -p /var/www/vhosts/api/shared /var/www/vhosts/api/releases as deploy@deploy_server
+ DEBUG [111595fd] Command: /usr/bin/env mkdir -p /var/www/vhosts/api/shared /var/www/vhosts/api/releases
+  INFO [111595fd] Finished in 0.061 seconds with exit status 0 (successful).
+  INFO [01a23cd5] Running /usr/bin/env mkdir -p /var/www/vhosts/api/shared as deploy@deploy_server
+ DEBUG [01a23cd5] Command: /usr/bin/env mkdir -p /var/www/vhosts/api/shared
+  INFO [01a23cd5] Finished in 0.064 seconds with exit status 0 (successful).
+ DEBUG [edb1dc90] Running [ -f /var/www/vhosts/api/shared/.env ] as deploy@deploy_server
+ DEBUG [edb1dc90] Command: [ -f /var/www/vhosts/api/shared/.env ]
+ DEBUG [edb1dc90] Finished in 0.063 seconds with exit status 1 (failed).
+ ERROR linked file /var/www/vhosts/api/shared/.env does not exist on deploy_server
+  INFO ---------------------------------------------------------------------------
+  INFO START 2025-04-30 14:50:12 +0900 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [5ea9e2cb] Running /usr/bin/env mkdir -p /tmp as deploy@deploy_server
+ DEBUG [5ea9e2cb] Command: /usr/bin/env mkdir -p /tmp
+  INFO [5ea9e2cb] Finished in 0.433 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-6141b64e41080c77362a.sh 0.0%
+  INFO Uploading /tmp/git-ssh-6141b64e41080c77362a.sh 100.0%
+  INFO [3278e4fa] Running /usr/bin/env chmod 700 /tmp/git-ssh-6141b64e41080c77362a.sh as deploy@deploy_server
+ DEBUG [3278e4fa] Command: /usr/bin/env chmod 700 /tmp/git-ssh-6141b64e41080c77362a.sh
+  INFO [3278e4fa] Finished in 0.061 seconds with exit status 0 (successful).
+  INFO [57cc065d] Running /usr/bin/env git ls-remote git@github.com:humake-dev/api.git HEAD as deploy@deploy_server
+ DEBUG [57cc065d] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-6141b64e41080c77362a.sh" ; /usr/bin/env git ls-remote git@github.com:humake-dev/api.git HEAD )
+ DEBUG [57cc065d] 	b73d986078ca98cde840004f3cd0c606de1b41e0	HEAD
+  INFO [57cc065d] Finished in 2.316 seconds with exit status 0 (successful).
+  INFO [7c5ed0a1] Running /usr/bin/env mkdir -p /var/www/vhosts/api/shared /var/www/vhosts/api/releases as deploy@deploy_server
+ DEBUG [7c5ed0a1] Command: /usr/bin/env mkdir -p /var/www/vhosts/api/shared /var/www/vhosts/api/releases
+  INFO [7c5ed0a1] Finished in 0.062 seconds with exit status 0 (successful).
+  INFO [96696c37] Running /usr/bin/env mkdir -p /var/www/vhosts/api/shared as deploy@deploy_server
+ DEBUG [96696c37] Command: /usr/bin/env mkdir -p /var/www/vhosts/api/shared
+  INFO [96696c37] Finished in 0.063 seconds with exit status 0 (successful).
+ DEBUG [645795c9] Running [ -f /var/www/vhosts/api/shared/.env ] as deploy@deploy_server
+ DEBUG [645795c9] Command: [ -f /var/www/vhosts/api/shared/.env ]
+ DEBUG [645795c9] Finished in 0.062 seconds with exit status 0 (successful).
+ DEBUG [f39435e7] Running [ -f /var/www/vhosts/api/current/REVISION ] as deploy@deploy_server
+ DEBUG [f39435e7] Command: [ -f /var/www/vhosts/api/current/REVISION ]
+ DEBUG [f39435e7] Finished in 0.065 seconds with exit status 1 (failed).
+ DEBUG [db657d19] Running [ -f /var/www/vhosts/api/current/REVISION_TIME ] as deploy@deploy_server
+ DEBUG [db657d19] Command: [ -f /var/www/vhosts/api/current/REVISION_TIME ]
+ DEBUG [db657d19] Finished in 0.061 seconds with exit status 1 (failed).
+ DEBUG [ddf7e746] Running [ -f /var/www/vhosts/api/repo/HEAD ] as deploy@deploy_server
+ DEBUG [ddf7e746] Command: [ -f /var/www/vhosts/api/repo/HEAD ]
+ DEBUG [ddf7e746] Finished in 0.057 seconds with exit status 1 (failed).
+ DEBUG [b1f8a686] Running if test ! -d /var/www/vhosts/api; then echo "Directory does not exist '/var/www/vhosts/api'" 1>&2; false; fi as deploy@deploy_server
+ DEBUG [b1f8a686] Command: if test ! -d /var/www/vhosts/api; then echo "Directory does not exist '/var/www/vhosts/api'" 1>&2; false; fi
+ DEBUG [b1f8a686] Finished in 0.061 seconds with exit status 0 (successful).
+  INFO [82002b48] Running /usr/bin/env git clone --mirror git@github.com:humake-dev/api.git /var/www/vhosts/api/repo as deploy@deploy_server
+ DEBUG [82002b48] Command: cd /var/www/vhosts/api && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-6141b64e41080c77362a.sh" ; /usr/bin/env git clone --mirror git@github.com:humake-dev/api.git /var/www/vhosts/api/repo )
+ DEBUG [82002b48] 	간략한 저장소로('/var/www/vhosts/api/repo') 복제합니다...
+  INFO [82002b48] Finished in 2.727 seconds with exit status 0 (successful).
+ DEBUG [493f4fc6] Running if test ! -d /var/www/vhosts/api/repo; then echo "Directory does not exist '/var/www/vhosts/api/repo'" 1>&2; false; fi as deploy@deploy_server
+ DEBUG [493f4fc6] Command: if test ! -d /var/www/vhosts/api/repo; then echo "Directory does not exist '/var/www/vhosts/api/repo'" 1>&2; false; fi
+ DEBUG [493f4fc6] Finished in 0.060 seconds with exit status 0 (successful).
+  INFO [472c34d0] Running /usr/bin/env git remote set-url origin git@github.com:humake-dev/api.git as deploy@deploy_server
+ DEBUG [472c34d0] Command: cd /var/www/vhosts/api/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-6141b64e41080c77362a.sh" ; /usr/bin/env git remote set-url origin git@github.com:humake-dev/api.git )
+  INFO [472c34d0] Finished in 0.066 seconds with exit status 0 (successful).
+  INFO [4e1d9340] Running /usr/bin/env git remote update --prune as deploy@deploy_server
+ DEBUG [4e1d9340] Command: cd /var/www/vhosts/api/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-6141b64e41080c77362a.sh" ; /usr/bin/env git remote update --prune )
+ DEBUG [4e1d9340] 	origin을(를) 가져오는 중
+  INFO [4e1d9340] Finished in 2.427 seconds with exit status 0 (successful).
+ DEBUG [3c49bf3e] Running if test ! -d /var/www/vhosts/api/repo; then echo "Directory does not exist '/var/www/vhosts/api/repo'" 1>&2; false; fi as deploy@deploy_server
+ DEBUG [3c49bf3e] Command: if test ! -d /var/www/vhosts/api/repo; then echo "Directory does not exist '/var/www/vhosts/api/repo'" 1>&2; false; fi
+ DEBUG [3c49bf3e] Finished in 0.067 seconds with exit status 0 (successful).
+  INFO [e39c1f4a] Running /usr/bin/env mkdir -p /var/www/vhosts/api/releases/20250430055016 as deploy@deploy_server
+ DEBUG [e39c1f4a] Command: cd /var/www/vhosts/api/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-6141b64e41080c77362a.sh" ; /usr/bin/env mkdir -p /var/www/vhosts/api/releases/20250430055016 )
+  INFO [e39c1f4a] Finished in 0.067 seconds with exit status 0 (successful).
+  INFO [f23e2c3d] Running /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /var/www/vhosts/api/releases/20250430055016 as deploy@deploy_server
+ DEBUG [f23e2c3d] Command: cd /var/www/vhosts/api/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-6141b64e41080c77362a.sh" ; /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /var/www/vhosts/api/releases/20250430055016 )
+ DEBUG [f23e2c3d] 	fatal: 유효한 객체 이름이 아닙니다: master
+ DEBUG [f23e2c3d] 	tar: 이것은 tar 아카이브가 아닌 것 같습니다
+ DEBUG [f23e2c3d] 	tar: 앞서 발생한 오류로 실패 코드를 반환하며 빠져나감
+  INFO ---------------------------------------------------------------------------
+  INFO START 2025-04-30 14:50:44 +0900 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [10d0b5d7] Running /usr/bin/env mkdir -p /tmp as deploy@deploy_server
+ DEBUG [10d0b5d7] Command: /usr/bin/env mkdir -p /tmp
+  INFO [10d0b5d7] Finished in 0.450 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-ceb92a49f60927a58e11.sh 0.0%
+  INFO Uploading /tmp/git-ssh-ceb92a49f60927a58e11.sh 100.0%
+  INFO [d867c4c5] Running /usr/bin/env chmod 700 /tmp/git-ssh-ceb92a49f60927a58e11.sh as deploy@deploy_server
+ DEBUG [d867c4c5] Command: /usr/bin/env chmod 700 /tmp/git-ssh-ceb92a49f60927a58e11.sh
+  INFO [d867c4c5] Finished in 0.060 seconds with exit status 0 (successful).
+  INFO [cd6123f2] Running /usr/bin/env git ls-remote git@github.com:humake-dev/api.git HEAD as deploy@deploy_server
+ DEBUG [cd6123f2] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-ceb92a49f60927a58e11.sh" ; /usr/bin/env git ls-remote git@github.com:humake-dev/api.git HEAD )
+ DEBUG [cd6123f2] 	b73d986078ca98cde840004f3cd0c606de1b41e0	HEAD
+  INFO [cd6123f2] Finished in 2.294 seconds with exit status 0 (successful).
+  INFO [8fe2a383] Running /usr/bin/env mkdir -p /var/www/vhosts/api/shared /var/www/vhosts/api/releases as deploy@deploy_server
+ DEBUG [8fe2a383] Command: /usr/bin/env mkdir -p /var/www/vhosts/api/shared /var/www/vhosts/api/releases
+  INFO [8fe2a383] Finished in 0.061 seconds with exit status 0 (successful).
+  INFO [ca675a46] Running /usr/bin/env mkdir -p /var/www/vhosts/api/shared as deploy@deploy_server
+ DEBUG [ca675a46] Command: /usr/bin/env mkdir -p /var/www/vhosts/api/shared
+  INFO [ca675a46] Finished in 0.060 seconds with exit status 0 (successful).
+ DEBUG [b9eb21af] Running [ -f /var/www/vhosts/api/shared/.env ] as deploy@deploy_server
+ DEBUG [b9eb21af] Command: [ -f /var/www/vhosts/api/shared/.env ]
+ DEBUG [b9eb21af] Finished in 0.062 seconds with exit status 0 (successful).
+ DEBUG [eef337ed] Running [ -f /var/www/vhosts/api/current/REVISION ] as deploy@deploy_server
+ DEBUG [eef337ed] Command: [ -f /var/www/vhosts/api/current/REVISION ]
+ DEBUG [eef337ed] Finished in 0.062 seconds with exit status 1 (failed).
+ DEBUG [fea13427] Running [ -f /var/www/vhosts/api/current/REVISION_TIME ] as deploy@deploy_server
+ DEBUG [fea13427] Command: [ -f /var/www/vhosts/api/current/REVISION_TIME ]
+ DEBUG [fea13427] Finished in 0.059 seconds with exit status 1 (failed).
+ DEBUG [49920171] Running [ -f /var/www/vhosts/api/repo/HEAD ] as deploy@deploy_server
+ DEBUG [49920171] Command: [ -f /var/www/vhosts/api/repo/HEAD ]
+ DEBUG [49920171] Finished in 0.060 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /var/www/vhosts/api/repo
+ DEBUG [43238d48] Running if test ! -d /var/www/vhosts/api/repo; then echo "Directory does not exist '/var/www/vhosts/api/repo'" 1>&2; false; fi as deploy@deploy_server
+ DEBUG [43238d48] Command: if test ! -d /var/www/vhosts/api/repo; then echo "Directory does not exist '/var/www/vhosts/api/repo'" 1>&2; false; fi
+ DEBUG [43238d48] Finished in 0.060 seconds with exit status 0 (successful).
+  INFO [b7f27a7b] Running /usr/bin/env git remote set-url origin git@github.com:humake-dev/api.git as deploy@deploy_server
+ DEBUG [b7f27a7b] Command: cd /var/www/vhosts/api/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-ceb92a49f60927a58e11.sh" ; /usr/bin/env git remote set-url origin git@github.com:humake-dev/api.git )
+  INFO [b7f27a7b] Finished in 0.066 seconds with exit status 0 (successful).
+  INFO [4b63df3d] Running /usr/bin/env git remote update --prune as deploy@deploy_server
+ DEBUG [4b63df3d] Command: cd /var/www/vhosts/api/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-ceb92a49f60927a58e11.sh" ; /usr/bin/env git remote update --prune )
+ DEBUG [4b63df3d] 	origin을(를) 가져오는 중
+  INFO [4b63df3d] Finished in 2.337 seconds with exit status 0 (successful).
+ DEBUG [e41c99a9] Running if test ! -d /var/www/vhosts/api/repo; then echo "Directory does not exist '/var/www/vhosts/api/repo'" 1>&2; false; fi as deploy@deploy_server
+ DEBUG [e41c99a9] Command: if test ! -d /var/www/vhosts/api/repo; then echo "Directory does not exist '/var/www/vhosts/api/repo'" 1>&2; false; fi
+ DEBUG [e41c99a9] Finished in 0.069 seconds with exit status 0 (successful).
+  INFO [35abb17e] Running /usr/bin/env mkdir -p /var/www/vhosts/api/releases/20250430055057 as deploy@deploy_server
+ DEBUG [35abb17e] Command: cd /var/www/vhosts/api/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-ceb92a49f60927a58e11.sh" ; /usr/bin/env mkdir -p /var/www/vhosts/api/releases/20250430055057 )
+  INFO [35abb17e] Finished in 0.063 seconds with exit status 0 (successful).
+  INFO [fe4d0cd6] Running /usr/bin/env git archive main | /usr/bin/env tar -x -f - -C /var/www/vhosts/api/releases/20250430055057 as deploy@deploy_server
+ DEBUG [fe4d0cd6] Command: cd /var/www/vhosts/api/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-ceb92a49f60927a58e11.sh" ; /usr/bin/env git archive main | /usr/bin/env tar -x -f - -C /var/www/vhosts/api/releases/20250430055057 )
+  INFO [fe4d0cd6] Finished in 0.071 seconds with exit status 0 (successful).
+ DEBUG [3ef6e883] Running if test ! -d /var/www/vhosts/api/repo; then echo "Directory does not exist '/var/www/vhosts/api/repo'" 1>&2; false; fi as deploy@deploy_server
+ DEBUG [3ef6e883] Command: if test ! -d /var/www/vhosts/api/repo; then echo "Directory does not exist '/var/www/vhosts/api/repo'" 1>&2; false; fi
+ DEBUG [3ef6e883] Finished in 0.062 seconds with exit status 0 (successful).
+ DEBUG [7db28a84] Running /usr/bin/env git rev-list --max-count=1 main as deploy@deploy_server
+ DEBUG [7db28a84] Command: cd /var/www/vhosts/api/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-ceb92a49f60927a58e11.sh" ; /usr/bin/env git rev-list --max-count=1 main )
+ DEBUG [7db28a84] 	b73d986078ca98cde840004f3cd0c606de1b41e0
+ DEBUG [7db28a84] Finished in 0.064 seconds with exit status 0 (successful).
+ DEBUG [63e58219] Running if test ! -d /var/www/vhosts/api/releases/20250430055057; then echo "Directory does not exist '/var/www/vhosts/api/releases/20250430055057'" 1>&2; false; fi as deploy@deploy_server
+ DEBUG [63e58219] Command: if test ! -d /var/www/vhosts/api/releases/20250430055057; then echo "Directory does not exist '/var/www/vhosts/api/releases/20250430055057'" 1>&2; false; fi
+ DEBUG [63e58219] Finished in 0.058 seconds with exit status 0 (successful).
+  INFO [f9caa0e8] Running /usr/bin/env echo "b73d986078ca98cde840004f3cd0c606de1b41e0" > REVISION as deploy@deploy_server
+ DEBUG [f9caa0e8] Command: cd /var/www/vhosts/api/releases/20250430055057 && /usr/bin/env echo "b73d986078ca98cde840004f3cd0c606de1b41e0" > REVISION
+  INFO [f9caa0e8] Finished in 0.063 seconds with exit status 0 (successful).
+ DEBUG [5dbcc7fa] Running if test ! -d /var/www/vhosts/api/repo; then echo "Directory does not exist '/var/www/vhosts/api/repo'" 1>&2; false; fi as deploy@deploy_server
+ DEBUG [5dbcc7fa] Command: if test ! -d /var/www/vhosts/api/repo; then echo "Directory does not exist '/var/www/vhosts/api/repo'" 1>&2; false; fi
+ DEBUG [5dbcc7fa] Finished in 0.061 seconds with exit status 0 (successful).
+ DEBUG [b14696b7] Running /usr/bin/env git --no-pager log -1 --pretty=format:"%ct" main as deploy@deploy_server
+ DEBUG [b14696b7] Command: cd /var/www/vhosts/api/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-ceb92a49f60927a58e11.sh" ; /usr/bin/env git --no-pager log -1 --pretty=format:"%ct" main )
+ DEBUG [b14696b7] 	1745991496
+ DEBUG [b14696b7] Finished in 0.063 seconds with exit status 0 (successful).
+ DEBUG [becee9d4] Running if test ! -d /var/www/vhosts/api/releases/20250430055057; then echo "Directory does not exist '/var/www/vhosts/api/releases/20250430055057'" 1>&2; false; fi as deploy@deploy_server
+ DEBUG [becee9d4] Command: if test ! -d /var/www/vhosts/api/releases/20250430055057; then echo "Directory does not exist '/var/www/vhosts/api/releases/20250430055057'" 1>&2; false; fi
+ DEBUG [becee9d4] Finished in 0.063 seconds with exit status 0 (successful).
+  INFO [1fa53d47] Running /usr/bin/env echo "1745991496" > REVISION_TIME as deploy@deploy_server
+ DEBUG [1fa53d47] Command: cd /var/www/vhosts/api/releases/20250430055057 && /usr/bin/env echo "1745991496" > REVISION_TIME
+  INFO [1fa53d47] Finished in 0.061 seconds with exit status 0 (successful).
+  INFO [cf4e0422] Running /usr/bin/env mkdir -p /var/www/vhosts/api/releases/20250430055057 as deploy@deploy_server
+ DEBUG [cf4e0422] Command: /usr/bin/env mkdir -p /var/www/vhosts/api/releases/20250430055057
+  INFO [cf4e0422] Finished in 0.063 seconds with exit status 0 (successful).
+ DEBUG [5c86c75a] Running [ -L /var/www/vhosts/api/releases/20250430055057/.env ] as deploy@deploy_server
+ DEBUG [5c86c75a] Command: [ -L /var/www/vhosts/api/releases/20250430055057/.env ]
+ DEBUG [5c86c75a] Finished in 0.059 seconds with exit status 1 (failed).
+ DEBUG [7a001d34] Running [ -f /var/www/vhosts/api/releases/20250430055057/.env ] as deploy@deploy_server
+ DEBUG [7a001d34] Command: [ -f /var/www/vhosts/api/releases/20250430055057/.env ]
+ DEBUG [7a001d34] Finished in 0.060 seconds with exit status 1 (failed).
+  INFO [baa63217] Running /usr/bin/env ln -s /var/www/vhosts/api/shared/.env /var/www/vhosts/api/releases/20250430055057/.env as deploy@deploy_server
+ DEBUG [baa63217] Command: /usr/bin/env ln -s /var/www/vhosts/api/shared/.env /var/www/vhosts/api/releases/20250430055057/.env
+  INFO [baa63217] Finished in 0.060 seconds with exit status 0 (successful).
+ DEBUG [1cb9645a] Running if test ! -d /var/www/vhosts/api/releases/20250430055057; then echo "Directory does not exist '/var/www/vhosts/api/releases/20250430055057'" 1>&2; false; fi as deploy@deploy_server
+ DEBUG [1cb9645a] Command: if test ! -d /var/www/vhosts/api/releases/20250430055057; then echo "Directory does not exist '/var/www/vhosts/api/releases/20250430055057'" 1>&2; false; fi
+ DEBUG [1cb9645a] Finished in 0.063 seconds with exit status 0 (successful).
+  INFO [63599073] Running /usr/bin/env poetry install --no-interaction --no-root as deploy@deploy_server
+ DEBUG [63599073] Command: cd /var/www/vhosts/api/releases/20250430055057 && /usr/bin/env poetry install --no-interaction --no-root
+ DEBUG [63599073] 	/usr/bin/env: `poetry'
+ DEBUG [63599073] 	: 그런 파일이나 디렉터리가 없습니다
+  INFO ---------------------------------------------------------------------------
+  INFO START 2025-04-30 14:53:46 +0900 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [c2a1fcce] Running /usr/bin/env mkdir -p /tmp as deploy@deploy_server
+ DEBUG [c2a1fcce] Command: ( export PATH="$HOME/.local/bin:$PATH" ; /usr/bin/env mkdir -p /tmp )
+  INFO [c2a1fcce] Finished in 0.430 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-a1652be8939c51491955.sh 0.0%
+  INFO Uploading /tmp/git-ssh-a1652be8939c51491955.sh 100.0%
+  INFO [3aee06e7] Running /usr/bin/env chmod 700 /tmp/git-ssh-a1652be8939c51491955.sh as deploy@deploy_server
+ DEBUG [3aee06e7] Command: ( export PATH="$HOME/.local/bin:$PATH" ; /usr/bin/env chmod 700 /tmp/git-ssh-a1652be8939c51491955.sh )
+  INFO [3aee06e7] Finished in 0.062 seconds with exit status 0 (successful).
+  INFO [5638e153] Running /usr/bin/env git ls-remote git@github.com:humake-dev/api.git HEAD as deploy@deploy_server
+ DEBUG [5638e153] Command: ( export PATH="$HOME/.local/bin:$PATH" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-a1652be8939c51491955.sh" ; /usr/bin/env git ls-remote git@github.com:humake-dev/api.git HEAD )
+ DEBUG [5638e153] 	b73d986078ca98cde840004f3cd0c606de1b41e0	HEAD
+  INFO [5638e153] Finished in 2.286 seconds with exit status 0 (successful).
+  INFO [7e54c6c7] Running /usr/bin/env mkdir -p /var/www/vhosts/api/shared /var/www/vhosts/api/releases as deploy@deploy_server
+ DEBUG [7e54c6c7] Command: ( export PATH="$HOME/.local/bin:$PATH" ; /usr/bin/env mkdir -p /var/www/vhosts/api/shared /var/www/vhosts/api/releases )
+  INFO [7e54c6c7] Finished in 0.062 seconds with exit status 0 (successful).
+  INFO [177a9bd5] Running /usr/bin/env mkdir -p /var/www/vhosts/api/shared as deploy@deploy_server
+ DEBUG [177a9bd5] Command: ( export PATH="$HOME/.local/bin:$PATH" ; /usr/bin/env mkdir -p /var/www/vhosts/api/shared )
+  INFO [177a9bd5] Finished in 0.067 seconds with exit status 0 (successful).
+ DEBUG [8d815d95] Running [ -f /var/www/vhosts/api/shared/.env ] as deploy@deploy_server
+ DEBUG [8d815d95] Command: [ -f /var/www/vhosts/api/shared/.env ]
+ DEBUG [8d815d95] Finished in 0.062 seconds with exit status 0 (successful).
+ DEBUG [6115c2b7] Running [ -f /var/www/vhosts/api/current/REVISION ] as deploy@deploy_server
+ DEBUG [6115c2b7] Command: [ -f /var/www/vhosts/api/current/REVISION ]
+ DEBUG [6115c2b7] Finished in 0.062 seconds with exit status 1 (failed).
+ DEBUG [ce8ffc76] Running [ -f /var/www/vhosts/api/current/REVISION_TIME ] as deploy@deploy_server
+ DEBUG [ce8ffc76] Command: [ -f /var/www/vhosts/api/current/REVISION_TIME ]
+ DEBUG [ce8ffc76] Finished in 0.064 seconds with exit status 1 (failed).
+ DEBUG [68e448ea] Running [ -f /var/www/vhosts/api/repo/HEAD ] as deploy@deploy_server
+ DEBUG [68e448ea] Command: [ -f /var/www/vhosts/api/repo/HEAD ]
+ DEBUG [68e448ea] Finished in 0.064 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /var/www/vhosts/api/repo
+ DEBUG [62701d98] Running if test ! -d /var/www/vhosts/api/repo; then echo "Directory does not exist '/var/www/vhosts/api/repo'" 1>&2; false; fi as deploy@deploy_server
+ DEBUG [62701d98] Command: if test ! -d /var/www/vhosts/api/repo; then echo "Directory does not exist '/var/www/vhosts/api/repo'" 1>&2; false; fi
+ DEBUG [62701d98] Finished in 0.060 seconds with exit status 0 (successful).
+  INFO [60f24e0a] Running /usr/bin/env git remote set-url origin git@github.com:humake-dev/api.git as deploy@deploy_server
+ DEBUG [60f24e0a] Command: cd /var/www/vhosts/api/repo && ( export PATH="$HOME/.local/bin:$PATH" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-a1652be8939c51491955.sh" ; /usr/bin/env git remote set-url origin git@github.com:humake-dev/api.git )
+  INFO [60f24e0a] Finished in 0.062 seconds with exit status 0 (successful).
+  INFO [b25e37c4] Running /usr/bin/env git remote update --prune as deploy@deploy_server
+ DEBUG [b25e37c4] Command: cd /var/www/vhosts/api/repo && ( export PATH="$HOME/.local/bin:$PATH" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-a1652be8939c51491955.sh" ; /usr/bin/env git remote update --prune )
+ DEBUG [b25e37c4] 	origin을(를) 가져오는 중
+  INFO [b25e37c4] Finished in 2.322 seconds with exit status 0 (successful).
+ DEBUG [8b408685] Running if test ! -d /var/www/vhosts/api/repo; then echo "Directory does not exist '/var/www/vhosts/api/repo'" 1>&2; false; fi as deploy@deploy_server
+ DEBUG [8b408685] Command: if test ! -d /var/www/vhosts/api/repo; then echo "Directory does not exist '/var/www/vhosts/api/repo'" 1>&2; false; fi
+ DEBUG [8b408685] Finished in 0.064 seconds with exit status 0 (successful).
+  INFO [cd19c7ce] Running /usr/bin/env mkdir -p /var/www/vhosts/api/releases/20250430055349 as deploy@deploy_server
+ DEBUG [cd19c7ce] Command: cd /var/www/vhosts/api/repo && ( export PATH="$HOME/.local/bin:$PATH" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-a1652be8939c51491955.sh" ; /usr/bin/env mkdir -p /var/www/vhosts/api/releases/20250430055349 )
+  INFO [cd19c7ce] Finished in 0.064 seconds with exit status 0 (successful).
+  INFO [d8da93ab] Running /usr/bin/env git archive main | /usr/bin/env tar -x -f - -C /var/www/vhosts/api/releases/20250430055349 as deploy@deploy_server
+ DEBUG [d8da93ab] Command: cd /var/www/vhosts/api/repo && ( export PATH="$HOME/.local/bin:$PATH" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-a1652be8939c51491955.sh" ; /usr/bin/env git archive main | /usr/bin/env tar -x -f - -C /var/www/vhosts/api/releases/20250430055349 )
+  INFO [d8da93ab] Finished in 0.066 seconds with exit status 0 (successful).
+ DEBUG [b7dea9fa] Running if test ! -d /var/www/vhosts/api/repo; then echo "Directory does not exist '/var/www/vhosts/api/repo'" 1>&2; false; fi as deploy@deploy_server
+ DEBUG [b7dea9fa] Command: if test ! -d /var/www/vhosts/api/repo; then echo "Directory does not exist '/var/www/vhosts/api/repo'" 1>&2; false; fi
+ DEBUG [b7dea9fa] Finished in 0.062 seconds with exit status 0 (successful).
+ DEBUG [1753b5d8] Running /usr/bin/env git rev-list --max-count=1 main as deploy@deploy_server
+ DEBUG [1753b5d8] Command: cd /var/www/vhosts/api/repo && ( export PATH="$HOME/.local/bin:$PATH" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-a1652be8939c51491955.sh" ; /usr/bin/env git rev-list --max-count=1 main )
+ DEBUG [1753b5d8] 	b73d986078ca98cde840004f3cd0c606de1b41e0
+ DEBUG [1753b5d8] Finished in 0.062 seconds with exit status 0 (successful).
+ DEBUG [92cf5de5] Running if test ! -d /var/www/vhosts/api/releases/20250430055349; then echo "Directory does not exist '/var/www/vhosts/api/releases/20250430055349'" 1>&2; false; fi as deploy@deploy_server
+ DEBUG [92cf5de5] Command: if test ! -d /var/www/vhosts/api/releases/20250430055349; then echo "Directory does not exist '/var/www/vhosts/api/releases/20250430055349'" 1>&2; false; fi
+ DEBUG [92cf5de5] Finished in 0.060 seconds with exit status 0 (successful).
+  INFO [f95c16d2] Running /usr/bin/env echo "b73d986078ca98cde840004f3cd0c606de1b41e0" > REVISION as deploy@deploy_server
+ DEBUG [f95c16d2] Command: cd /var/www/vhosts/api/releases/20250430055349 && ( export PATH="$HOME/.local/bin:$PATH" ; /usr/bin/env echo "b73d986078ca98cde840004f3cd0c606de1b41e0" > REVISION )
+  INFO [f95c16d2] Finished in 0.066 seconds with exit status 0 (successful).
+ DEBUG [3072b415] Running if test ! -d /var/www/vhosts/api/repo; then echo "Directory does not exist '/var/www/vhosts/api/repo'" 1>&2; false; fi as deploy@deploy_server
+ DEBUG [3072b415] Command: if test ! -d /var/www/vhosts/api/repo; then echo "Directory does not exist '/var/www/vhosts/api/repo'" 1>&2; false; fi
+ DEBUG [3072b415] Finished in 0.061 seconds with exit status 0 (successful).
+ DEBUG [e56b78f2] Running /usr/bin/env git --no-pager log -1 --pretty=format:"%ct" main as deploy@deploy_server
+ DEBUG [e56b78f2] Command: cd /var/www/vhosts/api/repo && ( export PATH="$HOME/.local/bin:$PATH" GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-a1652be8939c51491955.sh" ; /usr/bin/env git --no-pager log -1 --pretty=format:"%ct" main )
+ DEBUG [e56b78f2] 	1745991496
+ DEBUG [e56b78f2] Finished in 0.064 seconds with exit status 0 (successful).
+ DEBUG [278603fb] Running if test ! -d /var/www/vhosts/api/releases/20250430055349; then echo "Directory does not exist '/var/www/vhosts/api/releases/20250430055349'" 1>&2; false; fi as deploy@deploy_server
+ DEBUG [278603fb] Command: if test ! -d /var/www/vhosts/api/releases/20250430055349; then echo "Directory does not exist '/var/www/vhosts/api/releases/20250430055349'" 1>&2; false; fi
+ DEBUG [278603fb] Finished in 0.064 seconds with exit status 0 (successful).
+  INFO [712f1991] Running /usr/bin/env echo "1745991496" > REVISION_TIME as deploy@deploy_server
+ DEBUG [712f1991] Command: cd /var/www/vhosts/api/releases/20250430055349 && ( export PATH="$HOME/.local/bin:$PATH" ; /usr/bin/env echo "1745991496" > REVISION_TIME )
+  INFO [712f1991] Finished in 0.061 seconds with exit status 0 (successful).
+  INFO [76c31b1a] Running /usr/bin/env mkdir -p /var/www/vhosts/api/releases/20250430055349 as deploy@deploy_server
+ DEBUG [76c31b1a] Command: ( export PATH="$HOME/.local/bin:$PATH" ; /usr/bin/env mkdir -p /var/www/vhosts/api/releases/20250430055349 )
+  INFO [76c31b1a] Finished in 0.064 seconds with exit status 0 (successful).
+ DEBUG [03ee9756] Running [ -L /var/www/vhosts/api/releases/20250430055349/.env ] as deploy@deploy_server
+ DEBUG [03ee9756] Command: [ -L /var/www/vhosts/api/releases/20250430055349/.env ]
+ DEBUG [03ee9756] Finished in 0.061 seconds with exit status 1 (failed).
+ DEBUG [c09b0e1d] Running [ -f /var/www/vhosts/api/releases/20250430055349/.env ] as deploy@deploy_server
+ DEBUG [c09b0e1d] Command: [ -f /var/www/vhosts/api/releases/20250430055349/.env ]
+ DEBUG [c09b0e1d] Finished in 0.064 seconds with exit status 1 (failed).
+  INFO [01a8a857] Running /usr/bin/env ln -s /var/www/vhosts/api/shared/.env /var/www/vhosts/api/releases/20250430055349/.env as deploy@deploy_server
+ DEBUG [01a8a857] Command: ( export PATH="$HOME/.local/bin:$PATH" ; /usr/bin/env ln -s /var/www/vhosts/api/shared/.env /var/www/vhosts/api/releases/20250430055349/.env )
+  INFO [01a8a857] Finished in 0.061 seconds with exit status 0 (successful).
+ DEBUG [4a2fab89] Running if test ! -d /var/www/vhosts/api/releases/20250430055349; then echo "Directory does not exist '/var/www/vhosts/api/releases/20250430055349'" 1>&2; false; fi as deploy@deploy_server
+ DEBUG [4a2fab89] Command: if test ! -d /var/www/vhosts/api/releases/20250430055349; then echo "Directory does not exist '/var/www/vhosts/api/releases/20250430055349'" 1>&2; false; fi
+ DEBUG [4a2fab89] Finished in 0.062 seconds with exit status 0 (successful).
+  INFO [1680b066] Running /usr/bin/env poetry install --no-interaction --no-root as deploy@deploy_server
+ DEBUG [1680b066] Command: cd /var/www/vhosts/api/releases/20250430055349 && ( export PATH="$HOME/.local/bin:$PATH" ; /usr/bin/env poetry install --no-interaction --no-root )
+ DEBUG [1680b066] 	Creating virtualenv humake-api-bFP-EBWQ-py3.10 in /home/deploy/.cache/pypoetry/virtualenvs
+ DEBUG [1680b066] 	Installing dependencies from lock file
+ DEBUG [1680b066] 	
+Package operations: 24 installs, 0 updates, 0 removals
+
+ DEBUG [1680b066] 	  - Installing exceptiongroup (1.2.2)
+ DEBUG [1680b066] 	  - Installing idna (3.10)
+ DEBUG [1680b066] 	  - Installing sniffio (1.3.1)
+ DEBUG [1680b066] 	  - Installing typing-extensions (4.13.2)
+ DEBUG [1680b066] 	  - Installing annotated-types (0.7.0)
+ DEBUG [1680b066] 	  - Installing anyio (4.9.0)
+ DEBUG [1680b066] 	  - Installing pycparser (2.22)
+ DEBUG [1680b066] 	  - Installing pydantic-core (2.33.2)
+ DEBUG [1680b066] 	  - Installing typing-inspection (0.4.0)
+ DEBUG [1680b066] 	  - Installing cffi (1.17.1)
+ DEBUG [1680b066] 	  - Installing click (8.1.8)
+ DEBUG [1680b066] 	  - Installing greenlet (3.2.1)
+ DEBUG [1680b066] 	  - Installing h11 (0.16.0)
+ DEBUG [1680b066] 	  - Installing packaging (25.0)
+ DEBUG [1680b066] 	  - Installing starlette (0.46.2)
+ DEBUG [1680b066] 	  - Installing pydantic (2.11.4)
+ DEBUG [1680b066] 	  - Installing cryptography (44.0.2)
+ DEBUG [1680b066] 	  - Installing fastapi (0.115.12)
+ DEBUG [1680b066] 	  - Installing gunicorn (23.0.0)
+ DEBUG [1680b066] 	  - Installing itsdangerous (2.2.0)
+ DEBUG [1680b066] 	  - Installing pymysql (1.1.1)
+ DEBUG [1680b066] 	  - Installing python-dotenv (1.1.0)
+ DEBUG [1680b066] 	  - Installing sqlalchemy (2.0.40)
+ DEBUG [1680b066] 	  - Installing uvicorn (0.18.3)
+  INFO [1680b066] Finished in 3.239 seconds with exit status 0 (successful).
+  INFO [8fcb1f3e] Running /usr/bin/env ln -s /var/www/vhosts/api/releases/20250430055349 /var/www/vhosts/api/releases/current as deploy@deploy_server
+ DEBUG [8fcb1f3e] Command: ( export PATH="$HOME/.local/bin:$PATH" ; /usr/bin/env ln -s /var/www/vhosts/api/releases/20250430055349 /var/www/vhosts/api/releases/current )
+  INFO [8fcb1f3e] Finished in 0.064 seconds with exit status 0 (successful).
+  INFO [40d1a4b9] Running /usr/bin/env mv /var/www/vhosts/api/releases/current /var/www/vhosts/api as deploy@deploy_server
+ DEBUG [40d1a4b9] Command: ( export PATH="$HOME/.local/bin:$PATH" ; /usr/bin/env mv /var/www/vhosts/api/releases/current /var/www/vhosts/api )
+  INFO [40d1a4b9] Finished in 0.067 seconds with exit status 0 (successful).
+ DEBUG [e6df14bb] Running /usr/bin/env ls -x /var/www/vhosts/api/releases as deploy@deploy_server
+ DEBUG [e6df14bb] Command: ( export PATH="$HOME/.local/bin:$PATH" ; /usr/bin/env ls -x /var/www/vhosts/api/releases )
+ DEBUG [e6df14bb] 	20250430055016	20250430055057	20250430055349
+ DEBUG [e6df14bb] Finished in 0.065 seconds with exit status 0 (successful).
+  INFO Keeping 3 of 3 deployed releases on deploy_server
+ DEBUG [e30e20b2] Running [ -d /var/www/vhosts/api/current ] as deploy@deploy_server
+ DEBUG [e30e20b2] Command: [ -d /var/www/vhosts/api/current ]
+ DEBUG [e30e20b2] Finished in 0.062 seconds with exit status 0 (successful).
+ DEBUG [333d0695] Running /usr/bin/env readlink /var/www/vhosts/api/current as deploy@deploy_server
+ DEBUG [333d0695] Command: ( export PATH="$HOME/.local/bin:$PATH" ; /usr/bin/env readlink /var/www/vhosts/api/current )
+ DEBUG [333d0695] 	/var/www/vhosts/api/releases/20250430055349
+ DEBUG [333d0695] Finished in 0.066 seconds with exit status 0 (successful).
+  INFO No old releases (keeping newest 3) on deploy_server
+ DEBUG [f3984556] Running if test ! -d /var/www/vhosts/api/releases; then echo "Directory does not exist '/var/www/vhosts/api/releases'" 1>&2; false; fi as deploy@deploy_server
+ DEBUG [f3984556] Command: if test ! -d /var/www/vhosts/api/releases; then echo "Directory does not exist '/var/www/vhosts/api/releases'" 1>&2; false; fi
+ DEBUG [f3984556] Finished in 0.065 seconds with exit status 0 (successful).
+  INFO [1921b66c] Running /usr/bin/env echo "Branch main (at b73d986078ca98cde840004f3cd0c606de1b41e0) deployed as release 20250430055349 by toughjjh" >> /var/www/vhosts/api/revisions.log as deploy@deploy_server
+ DEBUG [1921b66c] Command: cd /var/www/vhosts/api/releases && ( export PATH="$HOME/.local/bin:$PATH" ; /usr/bin/env echo "Branch main (at b73d986078ca98cde840004f3cd0c606de1b41e0) deployed as release 20250430055349 by toughjjh" >> /var/www/vhosts/api/revisions.log )
+  INFO [1921b66c] Finished in 0.062 seconds with exit status 0 (successful).
