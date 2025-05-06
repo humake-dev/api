@@ -1,4 +1,5 @@
 import datetime
+from typing import Optional
 from pydantic import BaseModel
 
 class Message(BaseModel):
@@ -14,7 +15,7 @@ class MessageContent(BaseModel):
     id: int
     title : str
     content : str
-    readtime: datetime.datetime
+    readtime: Optional[datetime.datetime] = None
     created_at: datetime.datetime
     model_config = {
         "from_attributes": True
