@@ -5,7 +5,7 @@ set :application, "humake_API"
 set :repo_url, "git@github.com:humake-dev/api.git"
 
 # Default branch is :master
-ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
+ask :branch, "main"
 
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, "/var/www/vhosts/api"
