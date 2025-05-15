@@ -1,6 +1,4 @@
-from xmlrpc.client import Boolean
-
-from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, Boolean, Enum as SqlEnum
+from sqlalchemy import Column, Integer, Float, String, Text, DateTime, ForeignKey, Boolean, Enum as SqlEnum
 from sqlalchemy.orm import relationship
 from datetime import datetime
 from database import Base
@@ -252,3 +250,11 @@ class UserDevice(Base):
     created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
     updated_at = Column(DateTime, nullable=False, default=datetime.utcnow)
 
+class UserWeight(Base):
+    __tablename__ = "body_histories"
+
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, nullable=False)
+    weight = Column(Float, nullable=False)
+    created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
+    updated_at = Column(DateTime, nullable=False, default=datetime.utcnow)
