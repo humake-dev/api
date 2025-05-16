@@ -1,5 +1,4 @@
 import datetime
-from typing import Optional
 from pydantic import BaseModel
 
 class UserWeight(BaseModel):
@@ -14,3 +13,9 @@ class UserWeight(BaseModel):
 class UserWeightList(BaseModel):
     total: int = 0
     user_weight_list: list[UserWeight] = []
+
+class UserWeightCreate(BaseModel):
+    weight : float
+    model_config = {
+        "from_attributes": True
+    }

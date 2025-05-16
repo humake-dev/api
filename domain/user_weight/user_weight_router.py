@@ -18,8 +18,13 @@ def user_weight_list(db: Session = Depends(get_db), session: dict = Depends(get_
     if week is not None:
         filters["week"] = week
 
-    total, _user_weight_list = user_weight_crud.get_weight_list(db, session, filters=filters, skip=page*size, limit=size)
+    total, _user_weight_list = user_weight_crud.get_user_weight_list(db, session, filters=filters, skip=page*size, limit=size)
     return {
         'total': total,
         'user_weight_list': _user_weight_list
     }
+
+@router.post("/")
+def create_user_weight(_user_weight_create: user_weight_schema.UserWeightCreate,db: Session = Depends(get_db), session: dict = Depends(get_session)):
+    user_weight_id=user_weight_crud.set_user_weight(db, session, user_weight_data=_user_weight_create)
+    return user_weight_id
