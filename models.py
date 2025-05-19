@@ -251,10 +251,18 @@ class UserDevice(Base):
     updated_at = Column(DateTime, nullable=False, default=datetime.utcnow)
 
 class UserWeight(Base):
-    __tablename__ = "body_histories"
+    __tablename__ = "user_weights"
 
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, nullable=False)
     weight = Column(Float, nullable=False)
+    created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
+
+class UserHeight(Base):
+    __tablename__ = "user_heights"
+
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer,unique=True, nullable=False)
+    height = Column(Float, nullable=False)
     created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
     updated_at = Column(DateTime, nullable=False, default=datetime.utcnow)

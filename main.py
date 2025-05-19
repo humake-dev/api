@@ -14,6 +14,7 @@ from domain.message import message_router
 from domain.counsel import counsel_router
 from domain.stop import stop_router
 from domain.user_device import user_device_router
+from domain.user_height import user_height_router
 from domain.user_weight import user_weight_router
 
 # from fastapi.staticfiles import StaticFiles
@@ -37,6 +38,7 @@ app.include_router(notice_router.router)
 app.include_router(branch_router.router)
 app.include_router(user_router.router)
 app.include_router(user_device_router.router)
+app.include_router(user_height_router.router)
 app.include_router(user_weight_router.router)
 app.include_router(trainer_router.router)
 app.include_router(exercise_router.router)
