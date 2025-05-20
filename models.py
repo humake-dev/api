@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, Float, String, Text, DateTime, ForeignKey, Boolean, Enum as SqlEnum
+from sqlalchemy import Column, Integer, Float, String, Text, Date, DateTime, ForeignKey, Boolean, Enum as SqlEnum
 from sqlalchemy.orm import relationship
 from datetime import datetime
 from database import Base
@@ -266,3 +266,31 @@ class UserHeight(Base):
     height = Column(Float, nullable=False)
     created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
     updated_at = Column(DateTime, nullable=False, default=datetime.utcnow)
+
+class Order(Base):
+    __tablename__ = "orders"
+
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer,unique=True, nullable=False)
+    enable = Column(Boolean, default=True, nullable=False)
+    created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
+    updated_at = Column(DateTime, nullable=False, default=datetime.utcnow)
+
+class Enroll(Base):
+    __tablename__ = "enrolls"
+
+    id = Column(Integer, primary_key=True)
+    order_id = Column(Integer, ForeignKey("orders.id"))
+    course_id = Column(Integer, nullable=False)
+    start_date = Column(Date, nullable=False)
+    end_date = Column(Date, nullable=False)
+
+class Rent(Base):
+    __tablename__ = "rents"
+
+    id = Column(Integer, primary_key=True)
+    order_id = Column(Integer, ForeignKey("orders.id"))
+    facility_id = Column(Integer, nullable=False)
+    no = Column(Integer, nullable=False)
+    start_datetime = Column(DateTime, nullable=False)
+    end_datetime = Column(DateTime, nullable=False)

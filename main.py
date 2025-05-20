@@ -16,7 +16,8 @@ from domain.stop import stop_router
 from domain.user_device import user_device_router
 from domain.user_height import user_height_router
 from domain.user_weight import user_weight_router
-
+from domain.enroll import enroll_router
+from domain.rent import rent_router
 # from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()
@@ -48,5 +49,7 @@ app.include_router(entrance_router.router)
 app.include_router(message_router.router)
 app.include_router(counsel_router.router)
 app.include_router(stop_router.router)
+app.include_router(enroll_router.router)
+app.include_router(rent_router.router)
 
 # app.mount("/static", StaticFiles(directory="static"), name="static")

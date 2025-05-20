@@ -17,8 +17,8 @@ def user_detail( db: Session = Depends(get_db),session: dict = Depends(get_sessi
     return user
 
 @router.post("/login", response_model=user_schema.User)
-def login(response: Response, user_id: int, db: Session = Depends(get_db)):
-    user = user_crud.get_user(db, {"user_id": user_id})
+def login(response: Response, db: Session = Depends(get_db), user_id: int = None,  login_id: int = None ,phone: str = None):
+    user = user_crud.get_user(db, user_id, login_id, phone)
 
     session_data = {"user_id": user_id, "branch_id": user.branch_id}
     session_cookie = serializer.dumps(session_data)
