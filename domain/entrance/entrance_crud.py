@@ -1,5 +1,6 @@
 from datetime import datetime
 from models import Entrance
+from sqlalchemy import func
 from sqlalchemy import extract
 from sqlalchemy.orm import Session
 
@@ -14,7 +15,7 @@ def get_entrance_list(db: Session, session: dict, filters: dict = {}, skip: int 
         else:
             query = query.filter(getattr(Entrance, key) == value)
 
-    total = query.count()
+    total = query.group_by(func.date(Entrance.created_at)).count()
     entrance_list = query.order_by(Entrance.id.desc()).offset(skip).limit(limit).all()
     return total, entrance_list  # (전체 건수, 페이징 적용된 질문 목록)
 

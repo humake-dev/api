@@ -13,7 +13,7 @@ def get_user_weight_list(db: Session, session: dict, filters: dict = {}, skip: i
         elif key == 'week' and value:
             query = query.group_by(func.week(UserWeight.created_at))
         else:
-            query = query.group_by(UserWeight.created_at)
+            query = query.group_by(func.date(UserWeight.created_at))
 
     total = query.count()
     user_weight_list = query.order_by(UserWeight.id.desc()).offset(skip).limit(limit).all()
