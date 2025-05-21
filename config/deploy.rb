@@ -24,7 +24,7 @@ set :deploy_to, "/var/www/vhosts/api"
 append :linked_files, ".env"
 
 # Default value for linked_dirs is []
-# append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system", "vendor", "storage"
+append :linked_dirs, "log"
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }

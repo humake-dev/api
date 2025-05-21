@@ -3,6 +3,7 @@ from sqlalchemy.orm import relationship
 from datetime import datetime
 from database import Base
 from enum import Enum
+from sqlalchemy.ext.associationproxy import association_proxy
 
 class CounselQuestionCourse(str, Enum):
     default = "default"
@@ -65,22 +66,44 @@ class User(Base):
     updated_at = Column(DateTime, nullable=False)
     picture = relationship("UserPicture", back_populates="user", uselist=False)
     access_card = relationship("UserAccessCard", back_populates="user", uselist=False)
+    user_height = relationship("UserHeight", back_populates="user", uselist=False)
+
+    user_trainer = relationship("UserTrainer", back_populates="user", uselist=False)
+    trainer = association_proxy("user_trainer", "trainer")
 
 class UserAccessCard(Base):
     __tablename__ = "user_access_cards"
 
     id = Column(Integer, primary_key=True)
-    card_no = Column(String, nullable=False)
     user_id = Column(Integer, ForeignKey("users.id"))
+    card_no = Column(String, nullable=False)
     user = relationship("User",primaryjoin="User.id == foreign(UserAccessCard.user_id)")
 
 class UserPicture(Base):
     __tablename__ = "user_pictures"
 
     id = Column(Integer, primary_key=True)
-    picture_url = Column(String, nullable=False)
     user_id = Column(Integer, ForeignKey("users.id"))
+    picture_url = Column(String, nullable=False)
     user = relationship("User",primaryjoin="User.id == foreign(UserPicture.user_id)")
+
+class UserTrainer(Base):
+    __tablename__ = "user_trainers"
+
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey("users.id"))
+    trainer_id = Column(Integer, ForeignKey("admins.id"))
+
+    user = relationship("User", back_populates="user_trainer")
+    trainer = relationship("Trainer")
+
+class UserHeight(Base):
+    __tablename__ = "user_heights"
+
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey("users.id"))
+    height = Column(Float, nullable=False)
+    user = relationship("User",primaryjoin="User.id == foreign(UserHeight.user_id)")
 
 class Trainer(Base):
     __tablename__ = "admins"
@@ -257,15 +280,6 @@ class UserWeight(Base):
     user_id = Column(Integer, nullable=False)
     weight = Column(Float, nullable=False)
     created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
-
-class UserHeight(Base):
-    __tablename__ = "user_heights"
-
-    id = Column(Integer, primary_key=True)
-    user_id = Column(Integer,unique=True, nullable=False)
-    height = Column(Float, nullable=False)
-    created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
-    updated_at = Column(DateTime, nullable=False, default=datetime.utcnow)
 
 class Order(Base):
     __tablename__ = "orders"

@@ -14,12 +14,14 @@ def get_user(
             db.query(User)
             .join(User.access_card, isouter=True)
             .join(User.picture, isouter=True)
+            .join(User.user_trainer, isouter=True)
+            .join(User.user_height, isouter=True)
             .filter(User.id == user_id, User.enable == True)
             .first()
         )
         return user
 
-    elif login_id is not None and password is not None:
+    elif login_id is not None and phone is not None:
         # login
         user = (
             db.query(User)
