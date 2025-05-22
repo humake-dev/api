@@ -67,6 +67,7 @@ class User(Base):
     picture = relationship("UserPicture", back_populates="user", uselist=False)
     access_card = relationship("UserAccessCard", back_populates="user", uselist=False)
     user_height = relationship("UserHeight", back_populates="user", uselist=False)
+    user_weight = relationship("UserWeight", back_populates="user", uselist=False)
 
     user_trainer = relationship("UserTrainer", back_populates="user", uselist=False)
     trainer = association_proxy("user_trainer", "trainer")
@@ -104,6 +105,26 @@ class UserHeight(Base):
     user_id = Column(Integer, ForeignKey("users.id"))
     height = Column(Float, nullable=False)
     user = relationship("User",primaryjoin="User.id == foreign(UserHeight.user_id)")
+
+class UserWeight(Base):
+    __tablename__ = "user_weights"
+
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey("users.id"))
+    weight = Column(Float, nullable=False)
+    created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
+    user = relationship("User",primaryjoin="User.id == foreign(UserWeight.user_id)")
+
+class UserDevice(Base):
+    __tablename__ = "user_devices"
+
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, nullable=False)
+    os = Column(SqlEnum(UserDeviceOS), nullable=False)
+    token = Column(String, nullable=False)
+    enable = Column(Boolean, default=True, nullable=False)
+    created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
+    updated_at = Column(DateTime, nullable=False, default=datetime.utcnow)
 
 class Trainer(Base):
     __tablename__ = "admins"
@@ -261,25 +282,6 @@ class Stop(Base):
     enable = Column(Boolean, default=True, nullable=False)
     created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
     updated_at = Column(DateTime, nullable=False, default=datetime.utcnow)
-
-class UserDevice(Base):
-    __tablename__ = "user_devices"
-
-    id = Column(Integer, primary_key=True)
-    user_id = Column(Integer, nullable=False)
-    os = Column(SqlEnum(UserDeviceOS), nullable=False)
-    token = Column(String, nullable=False)
-    enable = Column(Boolean, default=True, nullable=False)
-    created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
-    updated_at = Column(DateTime, nullable=False, default=datetime.utcnow)
-
-class UserWeight(Base):
-    __tablename__ = "user_weights"
-
-    id = Column(Integer, primary_key=True)
-    user_id = Column(Integer, nullable=False)
-    weight = Column(Float, nullable=False)
-    created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
 
 class Order(Base):
     __tablename__ = "orders"

@@ -15,6 +15,10 @@ class UserHeight(BaseModel):
     id: int
     height: float
 
+class UserWeight(BaseModel):
+    id: int
+    weight: float
+
 class User(BaseModel):
     id: int
     branch_id: int
@@ -24,3 +28,4 @@ class User(BaseModel):
     access_card: Optional[UserAccessCard] = None
     trainer : Optional[Trainer] = None
     user_height : Optional[UserHeight] = None
+    user_weight : Optional[UserWeight] = None
