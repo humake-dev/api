@@ -2,10 +2,8 @@ import datetime
 from pydantic import BaseModel
 
 class UserWeight(BaseModel):
-    id: int
-    user_id: int
-    weight: float
-    created_at: datetime.datetime
+    avg_weight: float
+    group_date: datetime.datetime
     model_config = {
         "from_attributes": True
     }

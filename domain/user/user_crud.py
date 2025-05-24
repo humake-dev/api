@@ -1,7 +1,8 @@
 from fastapi import HTTPException, status
 from sqlalchemy.orm import Session, aliased
 from models import User, UserWeight  # 모델 임포트 예시
-from sqlalchemy import func
+from sqlalchemy import func,select
+
 
 
 def get_user(
@@ -11,17 +12,6 @@ def get_user(
     phone: str = None
 ):
 
-
-    latest_weight_subq = (
-        db.query(
-            UserWeight.user_id,
-            func.max(UserWeight.id).label("max_id")
-        )
-        .group_by(UserWeight.user_id)
-        .subquery()
-    )
-    LatestWeight = aliased(UserWeight)
-
     if user_id:
         # 기존 get_user
         user = (
@@ -30,14 +20,7 @@ def get_user(
             .join(User.picture, isouter=True)
             .join(User.user_trainer, isouter=True)
             .join(User.user_height, isouter=True)
-            .outerjoin(
-                latest_weight_subq,
-                User.id == latest_weight_subq.c.user_id
-            )
-            .outerjoin(
-                LatestWeight,
-                LatestWeight.id == latest_weight_subq.c.max_id
-            )
+            .join(User.user_weight, isouter=True)
             .filter(User.id == user_id, User.enable == True)
             .first()
         )

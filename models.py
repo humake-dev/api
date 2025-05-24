@@ -67,7 +67,7 @@ class User(Base):
     picture = relationship("UserPicture", back_populates="user", uselist=False)
     access_card = relationship("UserAccessCard", back_populates="user", uselist=False)
     user_height = relationship("UserHeight", back_populates="user", uselist=False)
-    user_weight = relationship("UserWeight", back_populates="user", uselist=False)
+    user_weight = relationship("UserWeight", back_populates="user", order_by="desc(UserWeight.id)", uselist=False)
 
     user_trainer = relationship("UserTrainer", back_populates="user", uselist=False)
     trainer = association_proxy("user_trainer", "trainer")
