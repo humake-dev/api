@@ -3,7 +3,7 @@ from pydantic import BaseModel
 
 class UserWeight(BaseModel):
     avg_weight: float
-    group_date: datetime.datetime
+    group_date: str
     model_config = {
         "from_attributes": True
     }

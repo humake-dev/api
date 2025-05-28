@@ -1,6 +1,6 @@
 from datetime import datetime
 from models import UserWeight
-from sqlalchemy import func
+from sqlalchemy import func, cast, String, literal
 from sqlalchemy.orm import Session
 from domain.user_weight import user_weight_schema
 
@@ -10,16 +10,23 @@ def get_user_weight_list(db: Session, session: dict, filters: dict = {}, skip: i
 
     # 기본 필터: 현재 로그인한 유저의 데이터만
     base_query = db.query(
-        func.avg(UserWeight.weight).label('avg_weight')
+        func.round(func.avg(UserWeight.weight), 1).label('avg_weight')
     ).filter(UserWeight.user_id == user_id)
 
-    # 그룹 기준 설정
+    # 그룹 기준 설정 (항상 string으로 캐스팅)
     if filters.get('month'):
-        group_field = func.date_format(UserWeight.created_at, "%Y-%m")  # '2025-05'
+        raw_group_field = func.date_format(UserWeight.created_at, "%Y-%m")  # e.g. '2025-05'
     elif filters.get('week'):
-        group_field = func.yearweek(UserWeight.created_at)
+        year_part = func.year(UserWeight.created_at)
+        week_part = func.lpad(func.week(UserWeight.created_at, 1), 2, '0')  # ISO week
+        raw_group_field = func.concat(
+            cast(year_part, String),
+            literal('-'),
+            week_part)
     else:
-        group_field = func.date(UserWeight.created_at)
+        raw_group_field = func.date(UserWeight.created_at)                  # e.g. 2025-05-26 (date)
+
+    group_field = cast(raw_group_field, String)
 
     # 그룹 기준도 select에 포함
     query = base_query.add_columns(group_field.label('group_date')).group_by(group_field)
