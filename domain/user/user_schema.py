@@ -23,6 +23,7 @@ class User(BaseModel):
     id: int
     branch_id: int
     name: str
+    phone : str
     created_at: datetime.datetime
     picture: Optional[UserPicture] = None
     access_card: Optional[UserAccessCard] = None

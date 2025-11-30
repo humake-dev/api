@@ -9,7 +9,7 @@ class CounselQuestionCourse(str, Enum):
     default = "default"
     pt = "pt"
 
-class TrainerStatus(str, Enum):
+class AdminStatus(str, Enum):
     H = "H"
     R = "R"
     L = "L"
@@ -17,6 +17,37 @@ class TrainerStatus(str, Enum):
 class UserDeviceOS(str, Enum):
     android = "android"
     ios = "ios"
+
+
+class Admin(Base):
+    __tablename__ = "admins"
+
+    id = Column(Integer, primary_key=True)
+    branch_id = Column(Integer, nullable=False)
+    name = Column(String, nullable=False)
+    phone = Column(String, nullable=False)    
+    is_trainer = Column(Boolean, nullable=False)
+    status = Column(SqlEnum(AdminStatus), nullable=False, default=AdminStatus.H)
+    enable = Column(Boolean, nullable=False)
+    created_at = Column(DateTime, nullable=False)
+    updated_at = Column(DateTime, nullable=False)
+
+    picture = relationship("AdminPicture", back_populates="admin", uselist=False)
+
+
+# Trainer는 단순히 편의용 alias + Query
+Trainer = Admin
+
+class AdminPicture(Base):
+    __tablename__ = "admin_pictures"
+
+    id = Column(Integer, primary_key=True)
+    picture_url = Column(String, nullable=False)
+    admin_id = Column(Integer, ForeignKey("admins.id"))
+    admin = relationship("Admin",primaryjoin="Admin.id == foreign(AdminPicture.admin_id)")
+
+TrainerPicture = AdminPicture 
+
 
 class Notice(Base):
     __tablename__ = "notices"
@@ -61,6 +92,7 @@ class User(Base):
     id = Column(Integer, primary_key=True)
     branch_id = Column(Integer, nullable=False)
     name = Column(String, nullable=False)
+    phone = Column(String, nullable=False)
     enable = Column(Boolean, default=True, nullable=False)
     created_at = Column(DateTime, nullable=False)
     updated_at = Column(DateTime, nullable=False)
@@ -70,7 +102,7 @@ class User(Base):
     user_weight = relationship("UserWeight", back_populates="user", order_by="desc(UserWeight.id)", uselist=False)
 
     user_trainer = relationship("UserTrainer", back_populates="user", uselist=False)
-    trainer = association_proxy("user_trainer", "trainer")
+    trainer = association_proxy("user_trainer", "admin")
 
 class UserAccessCard(Base):
     __tablename__ = "user_access_cards"
@@ -96,7 +128,7 @@ class UserTrainer(Base):
     trainer_id = Column(Integer, ForeignKey("admins.id"))
 
     user = relationship("User", back_populates="user_trainer")
-    trainer = relationship("Trainer")
+    trainer = relationship("Admin")
 
 class UserHeight(Base):
     __tablename__ = "user_heights"
@@ -126,26 +158,6 @@ class UserDevice(Base):
     created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
     updated_at = Column(DateTime, nullable=False, default=datetime.utcnow)
 
-class Trainer(Base):
-    __tablename__ = "admins"
-
-    id = Column(Integer, primary_key=True)
-    branch_id = Column(Integer, nullable=False)
-    name = Column(String, nullable=False)
-    is_trainer = Column(Boolean, nullable=False)
-    status = Column(SqlEnum(TrainerStatus), nullable=False, default=TrainerStatus.H)
-    enable = Column(Boolean, nullable=False)
-    created_at = Column(DateTime, nullable=False)
-    updated_at = Column(DateTime, nullable=False)
-    picture = relationship("TrainerPicture", back_populates="trainer", uselist=False)
-
-class TrainerPicture(Base):
-    __tablename__ = "admin_pictures"
-
-    id = Column(Integer, primary_key=True)
-    picture_url = Column(String, nullable=False)
-    admin_id = Column(Integer, ForeignKey("admins.id"))
-    trainer = relationship("Trainer",primaryjoin="Trainer.id == foreign(TrainerPicture.admin_id)")
 
 class ExerciseCategory(Base):
     __tablename__ = "exercise_categories"
@@ -193,7 +205,7 @@ class Reservation(Base):
     enable = Column(Boolean, default=True, nullable=False)
     created_at = Column(DateTime, nullable=False)
     updated_at = Column(DateTime, nullable=False)
-    trainer = relationship("Trainer",primaryjoin="Trainer.id == foreign(Reservation.manager_id)")
+    trainer = relationship("Admin",primaryjoin="Admin.id == foreign(Reservation.manager_id)")
 
 class ReservationUser(Base):
     __tablename__ = "reservation_users"
