@@ -8,8 +8,8 @@ from default_func import *
 router = APIRouter()
 
 @router.post("/admin_login", response_model=admin_schema.Admin)
-def login(response: Response, db: Session = Depends(get_db), admin_id: int = None, login_id: int = None ,phone: str = None):
-    admin = admin_crud.get_admin(db, admin_id, login_id, phone)
+def login(response: Response, db: Session = Depends(get_db), admin_id: int = None, login_id: str = None ,password: str = None):
+    admin = admin_crud.get_admin(db, admin_id, login_id, password)
 
     session_data = {"admin_id": admin_id, "branch_id": admin.branch_id}
     session_cookie = serializer.dumps(session_data)

@@ -24,8 +24,9 @@ class Admin(Base):
 
     id = Column(Integer, primary_key=True)
     branch_id = Column(Integer, nullable=False)
+    uid = Column(String, nullable=False)    
     name = Column(String, nullable=False)
-    phone = Column(String, nullable=False)    
+    encrypted_password = Column(String, nullable=False)    
     is_trainer = Column(Boolean, nullable=False)
     status = Column(SqlEnum(AdminStatus), nullable=False, default=AdminStatus.H)
     enable = Column(Boolean, nullable=False)
@@ -91,6 +92,7 @@ class User(Base):
 
     id = Column(Integer, primary_key=True)
     branch_id = Column(Integer, nullable=False)
+    login_id = Column(String, nullable=False)    
     name = Column(String, nullable=False)
     phone = Column(String, nullable=False)
     enable = Column(Boolean, default=True, nullable=False)

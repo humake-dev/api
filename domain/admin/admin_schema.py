@@ -9,7 +9,8 @@ class AdminPicture(BaseModel):
 class Admin(BaseModel):
     id: int
     branch_id: int
+    uid : str
     name: str
-    phone : str
+    encrypted_password : str
     created_at: datetime.datetime
     picture: Optional[AdminPicture] = None

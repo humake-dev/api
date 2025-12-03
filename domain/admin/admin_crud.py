@@ -1,13 +1,14 @@
 from fastapi import HTTPException, status
 from sqlalchemy.orm import Session, aliased
 from models import Admin
-
+import bcrypt
+import os
 
 def get_admin(
     db: Session,
     admin_id: int = None,
-    login_id: int = None,
-    phone: str = None
+    login_id: str = None,
+    password: str = None
 ):
 
     if admin_id:
@@ -20,12 +21,14 @@ def get_admin(
         )
         return admin
 
-    elif login_id is not None and phone is not None:
+    elif login_id is not None and password is not None:
+
+        encrypted=encrypt_password(password)
         # login
         admin = (
             db.query(Admin)
-            .filter(Admin.login_id == login_id)
-            .filter(Admin.phone == phone)  # 실제 구현 시엔 비밀번호 해싱 필요
+            .filter(Admin.uid == login_id)
+            .filter(Admin.encrypted_password == encrypted)  # 실제 구현 시엔 비밀번호 해싱 필요
             .first()
         )
         return admin
@@ -36,3 +39,14 @@ def get_admin(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="admin_id, (admin_id and password), or phone must be provided."
         )
+
+
+
+
+def encrypt_password(password: str):
+    key = os.getenv("ENCRYPTED_KEY", "")
+    raw = (password + key).encode("utf-8")
+    # PHP에서 사용한 salt: '$2a$10$5765dcdeee11439aab5ebO'
+    salt = b"$2a$10$5765dcdeee11439aab5ebO"
+    encrypted = bcrypt.hashpw(raw, salt)
+    return encrypted.decode("utf-8")
