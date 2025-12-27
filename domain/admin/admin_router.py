@@ -1,0 +1,38 @@
+from fastapi import APIRouter, Depends, Request, Response, HTTPException
+from sqlalchemy.orm import Session
+from domain.admin import admin_schema, admin_crud
+from starlette import status
+from default_func import *
+from fastapi.security import OAuth2PasswordRequestForm
+from jose import jwt, JWTError
+import os
+
+router = APIRouter()
+
+SECRET_KEY =  os.getenv("ENCRYPTED_KEY", "")
+ALGORITHM = "HS256"
+ACCESS_EXPIRE_MINUTES = 15
+REFRESH_EXPIRE_DAYS = 90
+
+@router.post("/admin_login", response_model=admin_schema.TokenResponse)
+def login( db: Session = Depends(get_db), form: OAuth2PasswordRequestForm = Depends()):
+    admin = admin_crud.authenticate_admin(db, form.username, form.password)
+    if not admin:
+        raise HTTPException(400, "Invalid credentials")
+
+    access = create_token({"sub": str(admin.id),"role": "admin"}, timedelta(minutes=ACCESS_EXPIRE_MINUTES))
+    refresh = create_token({"sub": str(admin.id),"role": "admin"}, timedelta(days=REFRESH_EXPIRE_DAYS))
+
+    return {"access_token": access, "refresh_token": refresh, "branch_id": admin.branch_id}
+
+
+@router.post("/refresh")
+def refresh(refresh_token: str):
+    try:
+        payload = jwt.decode(refresh_token, SECRET_KEY, algorithms=[ALGORITHM])
+        user = payload.get("sub")
+    except JWTError:
+        raise HTTPException(401, "Invalid refresh token")
+
+    access = create_token({"sub": user}, timedelta(minutes=ACCESS_EXPIRE_MINUTES))
+    return {"access_token": access}
