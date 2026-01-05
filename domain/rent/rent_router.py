@@ -6,7 +6,7 @@ from default_func import *
 
 router = APIRouter(prefix="/rents",dependencies=[Depends(get_current_user)])
 
-@router.get("/", response_model=rent_schema.RentList)
+@router.get("", response_model=rent_schema.RentList)
 def rent_list(db: Session = Depends(get_db), current_user: User | Admin = Depends(get_current_user), page: int = 0, size: int = 10):
     total, _rent_list = rent_crud.get_rent_list( db, current_user, skip=page*size, limit=size)
     return {

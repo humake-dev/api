@@ -20,3 +20,7 @@ class Admin(BaseModel):
     encrypted_password : str
     created_at: datetime.datetime
     picture: Optional[AdminPicture] = None
+
+class RefreshTokenRequest(BaseModel):
+    refresh_token: str
+

@@ -5,14 +5,8 @@ from starlette import status
 from default_func import *
 from fastapi.security import OAuth2PasswordRequestForm
 from jose import jwt, JWTError
-import os
 
 router = APIRouter()
-
-SECRET_KEY =  os.getenv("ENCRYPTED_KEY", "")
-ALGORITHM = "HS256"
-ACCESS_EXPIRE_MINUTES = 15
-REFRESH_EXPIRE_DAYS = 90
 
 @router.post("/admin_login", response_model=admin_schema.TokenResponse)
 def login( db: Session = Depends(get_db), form: OAuth2PasswordRequestForm = Depends()):
@@ -27,12 +21,30 @@ def login( db: Session = Depends(get_db), form: OAuth2PasswordRequestForm = Depe
 
 
 @router.post("/refresh")
-def refresh(refresh_token: str):
+def refresh(data: admin_schema.RefreshTokenRequest):
     try:
-        payload = jwt.decode(refresh_token, SECRET_KEY, algorithms=[ALGORITHM])
+        payload = jwt.decode(
+            data.refresh_token,
+            SECRET_KEY,
+            algorithms=[ALGORITHM]
+        )
+
         user = payload.get("sub")
+        role = payload.get("role")
+
+        if not user or not role:
+            raise HTTPException(401, "Invalid refresh token")
+
     except JWTError:
         raise HTTPException(401, "Invalid refresh token")
 
-    access = create_token({"sub": user}, timedelta(minutes=ACCESS_EXPIRE_MINUTES))
+    # 🔑 login과 동일한 payload 구조로 access 재발급
+    access = create_token(
+        {
+            "sub": user,
+            "role": role
+        },
+        timedelta(minutes=ACCESS_EXPIRE_MINUTES)
+    )
+
     return {"access_token": access}

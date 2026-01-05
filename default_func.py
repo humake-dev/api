@@ -24,14 +24,6 @@ ROLE_LEVEL = {
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/admin_login")
 
-def refresh_access_token(refresh_token: str, db: Session):
-    payload = jwt.decode(refresh_token, SECRET_KEY, algorithms=[ALGORITHM])
-
-    if not exists_refresh_token(db, refresh_token):
-        raise HTTPException(401, "Invalid refresh token")
-
-    return create_access_token(payload)
-
 
 def create_token(data: dict, expires_delta: timedelta):
     to_encode = data.copy()

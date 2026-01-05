@@ -6,7 +6,7 @@ from default_func import *
 
 router = APIRouter(prefix="/enrolls",dependencies=[Depends(get_current_user)])
 
-@router.get("/", response_model=enroll_schema.EnrollList)
+@router.get("", response_model=enroll_schema.EnrollList)
 def enroll_list(db: Session = Depends(get_db), current_user: User | Admin = Depends(get_current_user), page: int = 0, size: int = 10, user_id: int | None = None):
 
     # user_id로 다른 유저 조회 시도
