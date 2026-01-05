@@ -7,7 +7,7 @@ from default_func import *
 
 router = APIRouter(prefix="/exercises", dependencies=[Depends(get_current_user)])
 
-@router.get("/", response_model=exercise_schema.ExerciseList)
+@router.get("", response_model=exercise_schema.ExerciseList)
 def exercise_list(
         db: Session = Depends(get_db),
         exercise_category_id: Optional[int] = None,

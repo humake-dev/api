@@ -66,7 +66,7 @@ def azure_upload_task(data: bytes, thumb_path: str, orig_name: str, thumb_name: 
 router = APIRouter(prefix="/user_pictures", dependencies=[Depends(get_current_user)])
 
 
-@router.post("/", response_model=user_picture_schema.UserPictureCreate)
+@router.post("", response_model=user_picture_schema.UserPictureCreate)
 def upload_user_picture(user_id: int | None = Form(None), picture: UploadFile = File(...), db: Session = Depends(get_db), current_user: User | Admin = Depends(get_current_user), background_tasks: BackgroundTasks = None):
 	# determine target user
 	if user_id is None:

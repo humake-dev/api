@@ -7,7 +7,7 @@ from default_func import *
 
 router = APIRouter(prefix="/reservations",dependencies=[Depends(get_current_user)])
 
-@router.get("/", response_model=reservation_schema.ReservationList)
+@router.get("", response_model=reservation_schema.ReservationList)
 def reservation_list(db: Session = Depends(get_db), current_user: User | Admin = Depends(get_current_user), year: Optional[int] = None, month: Optional[int] = None, day: Optional[str] = None, page: int = 0, size: int = 10):
 
     filters = {}

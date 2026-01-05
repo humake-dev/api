@@ -7,7 +7,7 @@ from default_func import *
 
 router = APIRouter(prefix="/entrances", dependencies=[Depends(get_current_user)])
 
-@router.get("/", response_model=entrance_schema.EntranceList)
+@router.get("", response_model=entrance_schema.EntranceList)
 def entrance_list(db: Session = Depends(get_db), current_user: User | Admin = Depends(get_current_user), year: Optional[int] = None, month: Optional[int] = None, page: int = 0, size: int = 10):
 
     filters = {}

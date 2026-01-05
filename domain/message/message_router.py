@@ -6,7 +6,7 @@ from default_func import *
 
 router = APIRouter(prefix="/messages",dependencies=[Depends(get_current_user)])
 
-@router.get("/", response_model=message_schema.MessageList)
+@router.get("", response_model=message_schema.MessageList)
 def message_list(db: Session = Depends(get_db), current_user: User | Admin = Depends(get_current_user), page: int = 0, size: int = 10):
     total, _message_list = message_crud.get_message_list(db, current_user, skip=page*size, limit=size)
     return {
