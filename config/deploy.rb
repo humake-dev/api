@@ -1,5 +1,4 @@
 # config valid for current version and patch releases of Capistrano
-lock "~> 3.19.2"
 
 set :application, "humake_API"
 set :repo_url, "git@github.com:humake-dev/api.git"

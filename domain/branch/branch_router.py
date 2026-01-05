@@ -7,7 +7,7 @@ from default_func import *
 
 router = APIRouter(prefix="/branches",dependencies=[Depends(get_current_user)])
 
-@router.get("/", response_model=branch_schema.Branch)
+@router.get("", response_model=branch_schema.Branch)
 def branch_detail(db: Session = Depends(get_db),current_user: User | Admin = Depends(get_current_user)):
     branch = branch_crud.get_branch(db, current_user)
 

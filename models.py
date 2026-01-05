@@ -328,3 +328,17 @@ class Rent(Base):
     no = Column(Integer, nullable=False)
     start_datetime = Column(DateTime, nullable=False)
     end_datetime = Column(DateTime, nullable=False)
+
+class OrderProduct(Base):
+    __tablename__ = "order_products"
+
+    id = Column(Integer, primary_key=True)
+    order_id = Column(Integer, ForeignKey("order_products.order_id"))
+    product_id = Column(Integer, ForeignKey("order_products.product_id"))
+
+class ProductRelation(Base):
+    __tablename__ = "product_relations"
+
+    id = Column(Integer, primary_key=True)
+    product_id = Column(Integer, ForeignKey("products.id"))
+    product_relation_type_id = Column(Integer)

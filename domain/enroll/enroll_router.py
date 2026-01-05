@@ -7,7 +7,7 @@ from default_func import *
 router = APIRouter(prefix="/enrolls",dependencies=[Depends(get_current_user)])
 
 @router.get("", response_model=enroll_schema.EnrollList)
-def enroll_list(db: Session = Depends(get_db), current_user: User | Admin = Depends(get_current_user), page: int = 0, size: int = 10, user_id: int | None = None):
+def enroll_list(db: Session = Depends(get_db), current_user: User | Admin = Depends(get_current_user), page: int = 0, size: int = 10, user_id: int | None = None, primary_only: bool = False):
 
     # user_id로 다른 유저 조회 시도
     if user_id is not None:
@@ -18,10 +18,10 @@ def enroll_list(db: Session = Depends(get_db), current_user: User | Admin = Depe
                 detail="Permission denied"
             )
 
-        total, _enroll_list = enroll_crud.get_enroll_list( db, current_user, skip=page*size, limit=size, user_id=user_id)
+        total, _enroll_list = enroll_crud.get_enroll_list( db, current_user, skip=page*size, limit=size, user_id=user_id,primary_only=primary_only)
     # 자기 자신 조회
     else:
-        total, _enroll_list = enroll_crud.get_enroll_list( db, current_user, skip=page*size, limit=size)
+        total, _enroll_list = enroll_crud.get_enroll_list( db, current_user, skip=page*size, limit=size,primary_only=primary_only)
 
     return {
         'total': total,

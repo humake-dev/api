@@ -6,7 +6,7 @@ from default_func import *
 
 router = APIRouter(prefix="/trainers",dependencies=[Depends(get_current_user)])
 
-@router.get("/", response_model=trainer_schema.TrainerList)
+@router.get("", response_model=trainer_schema.TrainerList)
 def trainer_list(db: Session = Depends(get_db), current_user: User | Admin = Depends(get_current_user), page: int = 0, size: int = 10):
     total, _trainer_list = trainer_crud.get_trainer_list( db, current_user, skip=page*size, limit=size)
     return {
