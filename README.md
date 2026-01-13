@@ -75,7 +75,7 @@ DB 정보, SECRET_KEY 등 실행에 필요한 환경 변수를 설정하세요.
 ### 5. Run the server
 
 ```bash
-poetry run uvicorn app.main:app --reload
+poetry run uvicorn main:app --host 0.0.0.0 --reload
 ```
 
 개발 서버가 실행되면 API를 바로 사용할 수 있습니다.
