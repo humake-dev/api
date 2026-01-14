@@ -22,7 +22,7 @@ ROLE_LEVEL = {
     "admin": 2,
 }
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/admin_login")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/login")
 
 
 def create_token(data: dict, expires_delta: timedelta):
