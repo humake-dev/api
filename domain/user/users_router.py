@@ -13,5 +13,9 @@ def get_user_by_phone(phone: str, db: Session = Depends(get_db), current_user:  
 
     users = user_crud.get_user_py_phone(db, current_user, phone=cleaned_phone)
     if not users:
-        raise HTTPException(status_code=404, detail="users not found")
+        raise HTTPException(status_code=404,
+                            detail={
+                                "code": "USERS_NOT_FOUND",
+                                "message": "users not found"
+                            })
     return users

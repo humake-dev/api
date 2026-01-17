@@ -30,7 +30,11 @@ def user_detail(
         user = current_user
 
     if user is None:
-        raise HTTPException(status_code=404, detail="user not found")
+        raise HTTPException(status_code=404,
+            detail={
+                "code": "USERS_NOT_FOUND",
+                "message": "users not found"
+            })
 
     return user
 

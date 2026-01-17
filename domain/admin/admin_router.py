@@ -12,7 +12,13 @@ router = APIRouter()
 def login( db: Session = Depends(get_db), form: OAuth2PasswordRequestForm = Depends()):
     admin = admin_crud.authenticate_admin(db, form.username, form.password)
     if not admin:
-        raise HTTPException(400, "Invalid credentials")
+        raise HTTPException(
+            status_code=401,
+            detail={
+                "code": "INVALID_CREDENTIALS",
+                "message": "Invalid credentials"
+            }
+        )
 
     access = create_token({"sub": str(admin.id),"role": "admin"}, timedelta(minutes=ACCESS_EXPIRE_MINUTES))
     refresh = create_token({"sub": str(admin.id),"role": "admin"}, timedelta(days=REFRESH_EXPIRE_DAYS))
