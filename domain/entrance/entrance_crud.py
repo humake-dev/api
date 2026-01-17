@@ -1,7 +1,10 @@
+from http.client import HTTPException
+
 from models import Entrance, Admin, User
 from sqlalchemy import func
 from sqlalchemy import extract
 from sqlalchemy.orm import Session
+from datetime import datetime
 
 def get_entrance_list(db: Session, current_user: User | Admin, filters: dict = {}, skip: int = 0, limit: int = 10):
     query = db.query(Entrance).join(Entrance.user).filter(User.branch_id == current_user.branch_id)
@@ -28,3 +31,15 @@ def get_entrance(db: Session, current_user: User | Admin, id: int):
         entrance = db.query(Entrance).filter(Entrance.user_id == current_user.id ,Entrance.id == id).first()
 
     return entrance
+
+def set_entrance(db: Session,  user_id: int):
+    now = datetime.now().replace(microsecond=0)
+    entrance = Entrance(
+        user_id=user_id,
+        in_time=now,
+        created_at=now
+    )
+    db.add(entrance)
+    db.commit()
+
+    return entrance.id

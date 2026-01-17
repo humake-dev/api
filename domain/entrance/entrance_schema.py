@@ -13,3 +13,6 @@ class Entrance(BaseModel):
 class EntranceList(BaseModel):
     total: int = 0
     entrance_list: list[Entrance] = []
+
+class EntranceCreate(BaseModel):
+    user_id: int | None = None

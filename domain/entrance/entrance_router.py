@@ -31,3 +31,16 @@ def entrance_detail(entrance_id: int, current_user: User | Admin = Depends(get_c
         raise HTTPException(status_code=404, detail="entrance not found")
 
     return entrance
+
+@router.post("")
+def create_entrance(
+    payload: entrance_schema.EntranceCreate,
+    db: Session = Depends(get_db),
+    current_user: User | Admin = Depends(get_current_user),
+):
+    user_id = payload.user_id or current_user.id
+
+    if payload.user_id is not None and not isinstance(current_user, Admin):
+        raise HTTPException(403)
+
+    return entrance_crud.set_entrance(db, user_id)
