@@ -6,7 +6,6 @@ from typing import Optional
 from default_func import *
 from datetime import date
 import calendar
-from fastapi.encoders import jsonable_encoder
 
 router = APIRouter(prefix="/entrances", dependencies=[Depends(get_current_user)])
 
@@ -81,14 +80,10 @@ def entrance_list(
         limit=size,
     )
 
-    response_data = {
+    return {
         "total": total,
         "entrance_list": entrance_list,
     }
-
-    print("JSON RESPONSE >>>", jsonable_encoder(response_data))
-
-    return response_data
 
 
 @router.get("/{entrance_id}", response_model=entrance_schema.Entrance)
