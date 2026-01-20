@@ -45,12 +45,33 @@ def get_user_by_phone(
             detail="user_id, (login_id and password), or phone must be provided."
         )
 
+
 def get_user_py_phone(db: Session, current_user: Admin, phone: str):
+    """
+    - phone 길이가 8이면 정확히 검색
+    - phone 길이가 4 이상이면 LIKE 검색, 결과 1개면 반환
+    """
     try:
         branch_id = current_user.branch_id
         if branch_id is None:
             raise HTTPException(status_code=400, detail="branch_id not found in session")
-        return db.query(User).filter(User.branch_id == branch_id, User.phone==phone).first()
+
+        query = db.query(User).filter(User.branch_id == branch_id)
+
+        if len(phone) == 8:
+            # 8자리 입력이면 정확히 검색
+            user = query.filter(User.phone == phone).first()
+            return user
+
+        elif len(phone) >= 4:
+            # 4자리 이상이면 LIKE 검색
+            users = query.filter(User.phone.like(f"%{phone}%")).all()
+            if len(users) == 1:
+                return users[0]  # 결과가 1개면 반환
+            else:
+                return users  # 결과가 여러 개면 그대로 반환
+        else:
+            return None  # 4자리 미만은 검색하지 않음
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Internal Server Error: {str(e)}")
 
