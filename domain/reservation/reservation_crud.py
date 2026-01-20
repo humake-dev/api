@@ -3,28 +3,31 @@ from models import ReservationUser,Reservation,Trainer, Admin, User
 from sqlalchemy import select, func, extract
 from sqlalchemy.orm import Session
 
-def get_reservation_list(db: Session,  current_user: User | Admin, filters: dict = {}, skip: int = 0, limit: int = 10):
+def get_reservation_list(db: Session, current_user: User | Admin, filters: dict = {}, skip: int = 0, limit: int = 10):
+    query = db.query(Reservation).join(ReservationUser).filter(User.branch_id == current_user.branch_id)
+
+    if not isinstance(current_user, Admin):
+        query = query.filter(ReservationUser.user_id == current_user.id)
+
     conditions = [
         ReservationUser.user_id == current_user.id,
         Reservation.enable == True,
-    ]
+        ]
 
     for key, value in filters.items():
-        if key == 'day' and value:
-            try:
-                day_start = datetime.strptime(value, "%Y-%m-%d")
-                day_end = day_start + timedelta(days=1)
-                conditions.append(Reservation.created_at >= day_start)
-                conditions.append(Reservation.created_at < day_end)
-            except ValueError:
-                pass  # 날짜 파싱 실패 시 무시하거나 로깅해도 됨
-        elif key == 'year' and value:
-            conditions.append(extract('year', Reservation.created_at) == value)
+        if key == 'year' and value:
+            query = query.filter(extract('year', Reservation.start_time) == value)
         elif key == 'month' and value:
-            conditions.append(extract('month', Reservation.created_at) == value)
+            query = query.filter(extract('month', Reservation.start_time) == value)
+        elif key == 'day' and value:
+            query = query.filter(extract('day', Reservation.start_time) == value)
+        else:
+            query = query.filter(getattr(Reservation, key) == value)
 
     base_stmt: Select = (
-        select(Reservation.id,Reservation.start_time,Reservation.end_time,Reservation.enable,Reservation.created_at,ReservationUser.user_id,ReservationUser.complete,ReservationUser.complete_at, Trainer.name.label("trainer_name"))
+        select(Reservation.id, Reservation.start_time, Reservation.end_time, Reservation.enable,
+               Reservation.created_at, ReservationUser.user_id, ReservationUser.complete,
+               ReservationUser.complete_at, Trainer.name.label("trainer_name"))
         .join(ReservationUser).join(Trainer)
         .where(*conditions)  # ✅ 리스트 풀어서 넘김
     )
