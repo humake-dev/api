@@ -19,8 +19,8 @@ def get_enroll_list(
         .filter(
             Order.branch_id == current_user.branch_id,
             Order.enable == True,
-            Enroll.start_date < date.today(),
-            Enroll.end_date > date.today(),
+            Enroll.start_date <= date.today(),
+            Enroll.end_date >= date.today(),
         )
         .order_by(Order.id.desc())
     )
