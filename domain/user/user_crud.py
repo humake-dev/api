@@ -64,6 +64,10 @@ def get_user_py_phone(db: Session, current_user: Admin, phone: str):
             return user
 
         elif len(phone) >= 4:
+            users = query.filter(User.phone.like(f"%{phone}")).all()
+            if len(users) == 1:
+                return users[0]
+
             # 4자리 이상이면 LIKE 검색
             users = query.filter(User.phone.like(f"%{phone}%")).all()
             if len(users) == 1:
