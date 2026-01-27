@@ -103,7 +103,7 @@ class User(Base):
     user_weight = relationship("UserWeight", back_populates="user", order_by="desc(UserWeight.id)", uselist=False)
 
     user_trainer = relationship("UserTrainer", back_populates="user", uselist=False)
-    trainer = association_proxy("user_trainer", "admin")
+    trainer = association_proxy("user_trainer", "trainer")
 
 class UserAccessCard(Base):
     __tablename__ = "user_access_cards"

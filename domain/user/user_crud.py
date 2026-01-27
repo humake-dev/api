@@ -1,6 +1,6 @@
 from fastapi import HTTPException, status
 from sqlalchemy.orm import Session, aliased
-from models import Admin, User, UserWeight  # 모델 임포트 예시
+from models import Admin, User, UserTrainer, Trainer
 import re
 
 def get_user(
@@ -15,6 +15,7 @@ def get_user(
             .join(User.access_card, isouter=True)
             .join(User.picture, isouter=True)
             .join(User.user_trainer, isouter=True)
+            .join(UserTrainer.trainer, isouter=True)
             .join(User.user_height, isouter=True)
             .join(User.user_weight, isouter=True)
             .filter(User.id == user_id, User.enable == True)
