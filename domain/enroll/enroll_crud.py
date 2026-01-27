@@ -1,10 +1,9 @@
-from models import Enroll, Order, Admin, User, OrderProduct, ProductRelation, Product, EnrollTrainer
+from models import Enroll, Order, Admin, User, OrderProduct, ProductRelation, Product, EnrollTrainer, Course
 from sqlalchemy import select, func
 from sqlalchemy.orm import Session
 from datetime import date
 
 PRIMARY_COURSE_ID = 4
-
 
 def get_enroll_list(
         db: Session,
@@ -34,9 +33,13 @@ def get_enroll_list(
             Enroll.id,
             Enroll.start_date,
             Enroll.end_date,
+            Enroll.quantity,
+            Enroll.use_quantity,
+            Course.lesson_type.label("lesson_type"),
             Product.title.label("product_title"),
             Admin.name.label("trainer_name"),
         )
+        .join(Course, Enroll.course_id == Course.id)
         .join(Order, Enroll.order_id == Order.id)
         .join(OrderProduct, OrderProduct.order_id == Order.id)
         .join(Product, OrderProduct.product_id == Product.id)

@@ -317,6 +317,8 @@ class Enroll(Base):
     id = Column(Integer, primary_key=True)
     order_id = Column(Integer, ForeignKey("orders.id"))
     course_id = Column(Integer, nullable=False)
+    quantity = Column(Integer, nullable=False)
+    use_quantity = Column(Integer, nullable=False)
     start_date = Column(Date, nullable=False)
     end_date = Column(Date, nullable=False)
 
@@ -356,3 +358,9 @@ class EnrollTrainer(Base):
     id = Column(Integer, primary_key=True)
     enroll_id = Column(Integer, ForeignKey("enrolls.id"))
     trainer_id = Column(Integer, ForeignKey("admins.id"))
+
+class Course(Base):
+    __tablename__ = "courses"
+
+    id = Column(Integer, primary_key=True)
+    lesson_type = Column(Integer, nullable=False)
