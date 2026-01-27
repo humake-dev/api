@@ -310,6 +310,7 @@ class Order(Base):
     created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
     updated_at = Column(DateTime, nullable=False, default=datetime.utcnow)
 
+
 class Enroll(Base):
     __tablename__ = "enrolls"
 
@@ -333,8 +334,8 @@ class OrderProduct(Base):
     __tablename__ = "order_products"
 
     id = Column(Integer, primary_key=True)
-    order_id = Column(Integer, ForeignKey("order_products.order_id"))
-    product_id = Column(Integer, ForeignKey("order_products.product_id"))
+    order_id = Column(Integer, ForeignKey("orders.id"))
+    product_id = Column(Integer, ForeignKey("products.id"))
 
 class ProductRelation(Base):
     __tablename__ = "product_relations"
@@ -342,3 +343,16 @@ class ProductRelation(Base):
     id = Column(Integer, primary_key=True)
     product_id = Column(Integer, ForeignKey("products.id"))
     product_relation_type_id = Column(Integer)
+
+class Product(Base):
+    __tablename__ = "products"
+
+    id = Column(Integer, primary_key=True)
+    title = Column(String, nullable=False)
+
+class EnrollTrainer(Base):
+    __tablename__ = "enroll_trainers"
+
+    id = Column(Integer, primary_key=True)
+    enroll_id = Column(Integer, ForeignKey("enrolls.id"))
+    trainer_id = Column(Integer, ForeignKey("admins.id"))

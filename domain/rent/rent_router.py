@@ -7,8 +7,23 @@ from default_func import *
 router = APIRouter(prefix="/rents",dependencies=[Depends(get_current_user)])
 
 @router.get("", response_model=rent_schema.RentList)
-def rent_list(db: Session = Depends(get_db), current_user: User | Admin = Depends(get_current_user), page: int = 0, size: int = 10):
-    total, _rent_list = rent_crud.get_rent_list( db, current_user, skip=page*size, limit=size)
+def rent_list(db: Session = Depends(get_db), current_user: User | Admin = Depends(get_current_user), page: int = 0, size: int = 10, user_id: int | None = None):
+
+    # user_id로 다른 유저 조회 시도
+    if user_id is not None:
+        # admin만 허용
+        if not isinstance(current_user, Admin):
+            raise HTTPException(
+                status_code=403,
+                detail="Permission denied"
+            )
+
+        total, _rent_list = rent_crud.get_rent_list( db, current_user, skip=page*size, limit=size, user_id=user_id)
+    # 자기 자신 조회
+    else:
+        total, _rent_list = rent_crud.get_rent_list( db, current_user, skip=page*size, limit=size)
+
+
     return {
         'total': total,
         'rent_list': _rent_list

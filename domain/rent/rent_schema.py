@@ -5,8 +5,13 @@ from pydantic import BaseModel
 
 class Rent(BaseModel):
     id: int
-    start_datetime : datetime.datetime
-    end_datetime : datetime.datetime
+    start_date : datetime.date
+    end_date: datetime.date
+    no : int
+    product_title : str
+    model_config = {
+        "from_attributes": True
+    }
 
 class RentList(BaseModel):
     total: int = 0
