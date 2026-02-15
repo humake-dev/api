@@ -77,7 +77,12 @@ class Branch(Base):
     enable = Column(Boolean, default=True, nullable=False)
     created_at = Column(DateTime, nullable=False)
     updated_at = Column(DateTime, nullable=False)
-    picture = relationship("BranchPicture", back_populates="branch", uselist=False)
+
+    picture = relationship(
+        "BranchPicture",
+        back_populates="branch",
+        uselist=False
+    )
 
 class BranchPicture(Base):
     __tablename__ = "branch_pictures"
@@ -85,7 +90,10 @@ class BranchPicture(Base):
     id = Column(Integer, primary_key=True)
     picture_url = Column(String, nullable=False)
     branch_id = Column(Integer, ForeignKey("branches.id"))
-    branch = relationship("Branch",primaryjoin="Branch.id == foreign(BranchPicture.branch_id)")
+    branch = relationship(
+        "Branch",
+        back_populates="picture"
+    )
 
 class User(Base):
     __tablename__ = "users"
