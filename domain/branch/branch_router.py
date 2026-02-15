@@ -5,7 +5,7 @@ from domain.branch import branch_schema, branch_crud
 from starlette import status
 from default_func import *
 
-router = APIRouter(prefix="/branches",dependencies=[Depends(get_current_user)])
+router = APIRouter(prefix="/branch",dependencies=[Depends(get_current_user)])
 
 @router.get("", response_model=branch_schema.Branch)
 def branch_detail(id: int | None = None, db: Session = Depends(get_db),current_user: User | Admin = Depends(get_current_user)):
