@@ -1,11 +1,19 @@
 from datetime import datetime
-from models import Branch, BranchPicture, Admin, User
-from sqlalchemy.orm import Session
-from sqlalchemy import select, func
+from models import Branch
+from sqlalchemy.orm import joinedload, Session
 
-def get_branch(db: Session, current_user: User | Admin, id: int = None):
-    branch_id = id if isinstance(current_user, Admin) and id is not None else current_user.branch_id
+def get_branch_by_id(db: Session, branch_id: int):
+    return (
+        db.query(Branch)
+        .options(joinedload(Branch.picture))
+        .filter(Branch.id == branch_id)
+        .first()
+    )
 
-    branch = db.query(Branch).join(BranchPicture, isouter=True).filter(Branch.id == branch_id).first()
 
-    return branch
+def get_branches(db: Session):
+    return (
+        db.query(Branch)
+        .options(joinedload(Branch.picture))
+        .all()
+    )
