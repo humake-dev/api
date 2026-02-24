@@ -30,24 +30,33 @@ def get_user(
     )
 
 
-def get_user_by_phone(
+def get_user_by_branch_user_phone(
     db: Session,
-    password: str = None
+    branch_id: int,
+    user_id: int,
+    password: str
 ):
 
-    if password:
-        user = db.query(User).filter(User.phone == re.sub(r"\D", "", password)).first()
-        return user
-
-    else:
-        # 아무 것도 없을 경우 에러
+    if not password:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="user_id, (login_id and password), or phone must be provided."
+            detail="Password (phone) must be provided."
         )
 
+    clean_phone = re.sub(r"\D", "", password)
 
-def get_user_py_phone(db: Session, current_user: Admin, phone: str):
+    user = (
+        db.query(User)
+        .filter(User.branch_id == branch_id)
+        .filter(User.id == user_id)
+        .filter(User.phone == clean_phone)
+        .first()
+    )
+
+    return user
+
+
+def get_user_by_phone(db: Session, current_user: Admin, phone: str):
     """
     - phone 길이가 8이면 정확히 검색
     - phone 길이가 4 이상이면 LIKE 검색, 결과 1개면 반환
@@ -84,14 +93,5 @@ def get_user_py_phone(db: Session, current_user: Admin, phone: str):
                 return users  # 결과가 여러 개면 그대로 반환
         else:
             return None  # 4자리 미만은 검색하지 않음
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Internal Server Error: {str(e)}")
-
-def get_users_py_phone(db: Session, current_user: Admin, phone: str):
-    try:
-        branch_id = current_user.branch_id
-        if branch_id is None:
-            raise HTTPException(status_code=400, detail="branch_id not found in session")
-        return db.query(User).filter(User.branch_id == branch_id, User.phone.like(f"%{phone}%")).all()
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Internal Server Error: {str(e)}")

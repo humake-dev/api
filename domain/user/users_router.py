@@ -12,7 +12,7 @@ def get_user_by_phone(phone: str, db: Session = Depends(get_db), current_user:  
     # 숫자만 남기고 나머지 제거
     cleaned_phone = re.sub(r'[^0-9]', '', phone)
 
-    users = user_crud.get_user_py_phone(db, current_user, phone=cleaned_phone)
+    users = user_crud.get_user_by_phone(db, current_user, phone=cleaned_phone)
     if not users:
         raise HTTPException(status_code=404,
                             detail={
