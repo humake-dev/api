@@ -11,7 +11,8 @@ def get_enroll_list(
         skip: int = 0,
         limit: int = 10,
         user_id: int | None = None,
-        primary_only: bool = False
+        primary_only: bool = False,
+        current_only: bool = True
     ):
     # 🔐 권한 / 파라미터 검증 먼저
     if isinstance(current_user, Admin):
@@ -26,6 +27,8 @@ def get_enroll_list(
                 status_code=status.HTTP_403_FORBIDDEN,
                 detail="본인 외 사용자의 데이터는 조회할 수 없습니다."
             )
+
+    today = date.today()
 
     # ⬇️ 여기부터 DB 접근
     stmt = (
@@ -47,9 +50,7 @@ def get_enroll_list(
         .join(Admin, EnrollTrainer.trainer_id == Admin.id, isouter=True)
         .where(
             Order.branch_id == current_user.branch_id,
-            Order.enable.is_(True),
-            Enroll.start_date <= date.today(),
-            Enroll.end_date >= date.today(),
+            Order.enable.is_(True)
         )
         .order_by(Order.id.desc())
     )
@@ -60,6 +61,17 @@ def get_enroll_list(
             .join(ProductRelation, OrderProduct.product_id == ProductRelation.product_id)
             .where(ProductRelation.product_relation_type_id == PRIMARY_COURSE_ID)
         )
+
+    if current_only:
+        stmt = stmt.where(
+            Enroll.start_date <= today,
+            Enroll.end_date >= today,
+        )
+    else:
+        stmt = stmt.where(
+            Enroll.end_date >= today,
+        )
+
 
     # 🔑 user_id 조건은 단순화
     target_user_id = user_id if isinstance(current_user, Admin) else current_user.id

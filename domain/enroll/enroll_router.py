@@ -7,7 +7,7 @@ from default_func import *
 router = APIRouter(prefix="/enrolls",dependencies=[Depends(get_current_user)])
 
 @router.get("", response_model=enroll_schema.EnrollList)
-def enroll_list(db: Session = Depends(get_db), current_user: User | Admin = Depends(get_current_user), page: int = 0, size: int = 10, user_id: int | None = None, primary_only: bool = True):
+def enroll_list(db: Session = Depends(get_db), current_user: User | Admin = Depends(get_current_user), page: int = 0, size: int = 10, user_id: int | None = None, primary_only: bool = True, current_only: bool = True):
 
     # user_id로 다른 유저 조회 시도
     if user_id is not None:
@@ -18,25 +18,16 @@ def enroll_list(db: Session = Depends(get_db), current_user: User | Admin = Depe
                 detail="Permission denied"
             )
 
-        total, _enroll_list = enroll_crud.get_enroll_list( db, current_user, skip=page*size, limit=size, user_id=user_id,primary_only=primary_only)
+        total, _enroll_list = enroll_crud.get_enroll_list( db, current_user, skip=page*size, limit=size, user_id=user_id,primary_only=primary_only,current_only=current_only)
     # 자기 자신 조회
     else:
-        total, _enroll_list = enroll_crud.get_enroll_list( db, current_user, skip=page*size, limit=size,primary_only=primary_only)
+        total, _enroll_list = enroll_crud.get_enroll_list( db, current_user, skip=page*size, limit=size,primary_only=primary_only,current_only=current_only)
 
 
     return {
         'total': total,
         'enroll_list': _enroll_list
     }
-
-    #response_data = {
-   #     "total": total,
-   #     "_enroll_list": _enroll_list,
-   # }
-
-   # print("JSON RESPONSE >>>", jsonable_encoder(response_data))
-
-   # return response_data
 
 @router.get("/{enroll_id}", response_model=enroll_schema.Enroll)
 def enroll_detail(enroll_id: int, current_user: User | Admin = Depends(get_current_user), db: Session = Depends(get_db)):
