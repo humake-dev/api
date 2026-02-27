@@ -23,7 +23,6 @@ def enroll_list(db: Session = Depends(get_db), current_user: User | Admin = Depe
     else:
         total, _enroll_list = enroll_crud.get_enroll_list( db, current_user, skip=page*size, limit=size,primary_only=primary_only,current_only=current_only)
 
-
     return {
         'total': total,
         'enroll_list': _enroll_list
