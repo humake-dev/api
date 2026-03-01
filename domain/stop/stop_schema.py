@@ -1,7 +1,7 @@
 import datetime
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
-class Stop(BaseModel):
+class StopBase(BaseModel):
     id: int
     user_id: int
     stop_start_date: datetime.date
@@ -12,9 +12,15 @@ class Stop(BaseModel):
         "from_attributes": True
     }
 
+class StopListItem(StopBase):
+    pass
+
 class StopList(BaseModel):
     total: int = 0
-    stop_list: list[Stop] = []
+    stop_list: list[StopListItem] = Field(default_factory=list)
+
+class StopDetail(StopBase):
+    description: str
 
 class StopCreate(BaseModel):
     stop_start_date : datetime.date

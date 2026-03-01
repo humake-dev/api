@@ -4,6 +4,7 @@ from domain.stop import stop_schema, stop_crud
 from starlette import status
 from default_func import *
 
+
 router = APIRouter(prefix="/stops",dependencies=[Depends(get_current_user)])
 
 @router.get("", response_model=stop_schema.StopList)
@@ -14,7 +15,7 @@ def stop_list(db: Session = Depends(get_db), current_user: User | Admin = Depend
         'stop_list': _stop_list
     }
 
-@router.get("/{stop_id}", response_model=stop_schema.Stop)
+@router.get("/{stop_id}", response_model=stop_schema.StopDetail)
 def stop_detail(stop_id: int, current_user: User | Admin = Depends(get_current_user), db: Session = Depends(get_db)):
     stop = stop_crud.get_stop(db, current_user, id=stop_id)
 
