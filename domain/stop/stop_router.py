@@ -11,7 +11,7 @@ def stop_list(db: Session = Depends(get_db), current_user: User | Admin = Depend
     total, _stop_list = stop_crud.get_stop_list( db, current_user, skip=page*size, limit=size)
     return {
         'total': total,
-        '_top_list': _stop_list
+        'stop_list': _stop_list
     }
 
 @router.get("/{stop_id}", response_model=stop_schema.Stop)

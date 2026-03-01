@@ -4,9 +4,13 @@ from pydantic import BaseModel
 class Stop(BaseModel):
     id: int
     user_id: int
-    stop_start_date: str
-    stop_end_date: str
+    stop_start_date: datetime.date
+    stop_end_date: datetime.date
     created_at: datetime.datetime
+
+    model_config = {
+        "from_attributes": True
+    }
 
 class StopList(BaseModel):
     total: int = 0
