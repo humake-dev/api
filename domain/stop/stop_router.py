@@ -24,6 +24,18 @@ def stop_detail(stop_id: int, current_user: User | Admin = Depends(get_current_u
 
     return stop
 
+@router.post("/hide/{stop_id}")
+def stop_disable(stop_id: int, current_user: User | Admin = Depends(get_current_user), db: Session = Depends(get_db)):
+    stop = stop_crud.get_stop(db, current_user, id=stop_id)
+
+    if stop is None:
+        raise HTTPException(status_code=404, detail="stop not found")
+
+    stop_crud.set_disable_stop(db, current_user, id=stop.id)
+
+    return {"message": "stop disabled"}
+
+
 @router.post("")
 def create_stop(_stop_create: stop_schema.StopCreate,db: Session = Depends(get_db), current_user: User | Admin = Depends(get_current_user)):
     stop_id=stop_crud.set_stop(db, current_user, stop_data=_stop_create)

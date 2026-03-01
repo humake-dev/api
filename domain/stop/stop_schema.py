@@ -4,6 +4,7 @@ from pydantic import BaseModel, Field
 class StopBase(BaseModel):
     id: int
     user_id: int
+    complete: bool
     stop_start_date: datetime.date
     stop_end_date: datetime.date
     created_at: datetime.datetime

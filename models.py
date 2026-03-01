@@ -304,6 +304,7 @@ class Stop(Base):
     stop_start_date = Column(DateTime, nullable=False)
     stop_end_date = Column(DateTime, nullable=False)
     description = Column(String, nullable=False)
+    complete = Column(Boolean, default=False)
     enable = Column(Boolean, default=True, nullable=False)
     created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
     updated_at = Column(DateTime, nullable=False, default=datetime.utcnow)
