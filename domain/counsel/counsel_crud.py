@@ -1,32 +1,58 @@
 from datetime import datetime
-from models import Counsel, CounselContent, CounselUser, Admin, User
-from sqlalchemy.orm import Session
+from models import Counsel, CounselContent, CounselUser, Admin, User, CounselResponse
+from sqlalchemy.orm import Session, selectinload
 from sqlalchemy import select, func
 from domain.counsel import counsel_schema
 
-def get_counsel_list(db: Session,  current_user: User | Admin, skip: int = 0, limit: int = 10):
+
+def get_counsel_list(db: Session, current_user: User | Admin, skip: int = 0, limit: int = 10):
+
     base_stmt = (
-        select(*Counsel.__table__.columns).join(CounselUser).where(
-            CounselUser.user_id == current_user.id ,CounselUser.display == True)
+        select(
+            *Counsel.__table__.columns,
+            (CounselResponse.id != None).label("has_response")
+        )
+        .join(CounselUser)
+        .outerjoin(CounselResponse)
+        .where(
+            CounselUser.user_id == current_user.id,
+            CounselUser.display == True
+        )
     )
 
     count_stmt = select(func.count()).select_from(base_stmt.subquery())
     total = db.execute(count_stmt).scalar()
 
-    data_stmt = base_stmt.order_by(Counsel.id.desc()).offset(skip).limit(limit)
+    data_stmt = (
+        base_stmt
+        .order_by(Counsel.id.desc())
+        .offset(skip)
+        .limit(limit)
+    )
+
     counsel_list = db.execute(data_stmt).mappings().all()
 
     return total, counsel_list
 
-def get_counsel(db: Session,  current_user: User | Admin, id: int):
-    base_stmt = (
-        select(Counsel.id, CounselContent.content, Counsel.created_at).select_from(CounselContent).join(Counsel).join(CounselUser).where(
-            Counsel.id == id, CounselUser.user_id == current_user.id,CounselUser.display == True, Counsel.enable == True)
+
+def get_counsel(db: Session, current_user: User | Admin, id: int):
+
+    stmt = (
+        select(Counsel)
+        .join(CounselUser)
+        .options(
+            selectinload(Counsel.content),
+            selectinload(Counsel.response),
+        )
+        .where(
+            Counsel.id == id,
+            CounselUser.user_id == current_user.id,
+            CounselUser.display == True,
+            Counsel.enable == True,
+        )
     )
 
-    counsel = db.execute(base_stmt).mappings().first()
-
-    return counsel
+    return db.execute(stmt).scalars().first()
 
 def set_counsel(db: Session,  current_user: User | Admin, counsel_data: counsel_schema.CounselCreate):
     counsel = Counsel(

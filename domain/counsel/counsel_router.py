@@ -14,7 +14,7 @@ def counsel_list(db: Session = Depends(get_db), current_user: User | Admin = Dep
         'counsel_list': _counsel_list
     }
 
-@router.get("/{counsel_id}", response_model=counsel_schema.CounselContent)
+@router.get("/{counsel_id}", response_model=counsel_schema.Counsel)
 def counsel_detail(counsel_id: int, current_user: User | Admin = Depends(get_current_user), db: Session = Depends(get_db)):
     counsel = counsel_crud.get_counsel(db, current_user, id=counsel_id)
 

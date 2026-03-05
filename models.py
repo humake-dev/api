@@ -274,18 +274,22 @@ class Counsel(Base):
     title = Column(String, nullable=False)
     type = Column(String, nullable=False)
     execute_date = Column(DateTime, nullable=False)
-    question_course = Column(SqlEnum(CounselQuestionCourse), nullable=False, default=CounselQuestionCourse.default)
+    question_course = Column(SqlEnum(CounselQuestionCourse), nullable=False)
     enable = Column(Boolean, default=True, nullable=False)
-    created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
-    updated_at = Column(DateTime, nullable=False, default=datetime.utcnow)
-    content = relationship("CounselContent", back_populates="counsel", uselist=False)
+
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow)
+
+    content = relationship("CounselContent", uselist=False, back_populates="counsel")
+    response = relationship("CounselResponse", uselist=False, back_populates="counsel")
 
 class CounselContent(Base):
     __tablename__ = "counsel_contents"
 
     id = Column(Integer, ForeignKey("counsels.id"), primary_key=True)
     content = Column(Text, nullable=False)
-    counsel = relationship("Counsel",primaryjoin="Counsel.id == foreign(CounselContent.id)")
+
+    counsel = relationship("Counsel", back_populates="content")
 
 class CounselUser(Base):
     __tablename__ = "counsel_users"
@@ -295,6 +299,18 @@ class CounselUser(Base):
     display = Column(Boolean, nullable=False, default=True)
     counsel_id = Column(Integer, ForeignKey("counsels.id"))
     counsel = relationship("Counsel",primaryjoin="Counsel.id == foreign(CounselUser.counsel_id)")
+
+
+class CounselResponse(Base):
+    __tablename__ = "counsel_responses"
+
+    id = Column(Integer, primary_key=True)
+    counsel_id = Column(Integer, ForeignKey("counsels.id"))
+    content = Column(Text, nullable=False)
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+    counsel = relationship("Counsel", back_populates="response")
+
 
 class Stop(Base):
     __tablename__ = "user_stop_requests"
