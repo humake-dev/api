@@ -55,9 +55,13 @@ def get_counsel(db: Session, current_user: User | Admin, id: int):
     return db.execute(stmt).scalars().first()
 
 def set_counsel(db: Session,  current_user: User | Admin, counsel_data: counsel_schema.CounselCreate):
+    title = counsel_data.title.strip() if counsel_data.title else ""
+    if not title:
+        title = f"앱 상담 요청 ({datetime.now().strftime('%m-%d')})"
+
     counsel = Counsel(
         branch_id=current_user.branch_id,
-        title='앱에서의 요청',
+        title=title,
         question_course=counsel_data.question_course,
         execute_date=datetime.now(),
         type='D'

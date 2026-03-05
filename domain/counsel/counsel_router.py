@@ -26,7 +26,7 @@ def counsel_detail(counsel_id: int, current_user: User | Admin = Depends(get_cur
 @router.post("")
 def create_counsel(_counsel_create: counsel_schema.CounselCreate,db: Session = Depends(get_db), current_user: User | Admin = Depends(get_current_user)):
     counsel_id=counsel_crud.set_counsel(db, current_user, counsel_data=_counsel_create)
-    return counsel_id
+    return {"id": counsel_id}
 
 @router.post("/hide/{counsel_id}")
 def counsel_hide(counsel_id: int, current_user: User | Admin = Depends(get_current_user), db: Session = Depends(get_db)):

@@ -36,6 +36,7 @@ class CounselList(BaseModel):
     counsel_list: list[CounselSummary] = []
 
 class CounselCreate(BaseModel):
+    title: str | None = None
     question_course: CounselQuestionCourse
     content : str
     model_config = {
