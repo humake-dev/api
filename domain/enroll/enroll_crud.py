@@ -67,10 +67,7 @@ def get_enroll_list(
             Enroll.start_date <= today,
             Enroll.end_date >= today,
         )
-    else:
-        stmt = stmt.where(
-            Enroll.end_date >= today,
-        )
+
 
 
     # 🔑 user_id 조건은 단순화
